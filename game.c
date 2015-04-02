@@ -3,7 +3,7 @@
 #include "space.h"
 #include <stdio.h>
 
-int initializeGame(game_stc* game) {
+int initializeGame() {
   if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     return -1;
 
@@ -12,6 +12,9 @@ int initializeGame(game_stc* game) {
 
   /* initializing renderer   (window, index, rendering flags) */
   game->renderer = SDL_CreateRenderer(game->window,-1,0);
+
+  /* initialize variable to know if we keep going in the game */
+  game->running = 1;
 
   /* initialize timer */
   game->timer = SDL_GetTicks();
@@ -24,7 +27,7 @@ int initializeGame(game_stc* game) {
   return 0;
 }
 
-int initializeBackground(game_stc* game) {
+int initializeBackground() {
   /* setting box for near */
   game->background.near.x = -640;
   game->background.near.y = 0;
@@ -51,13 +54,19 @@ int initializeBackground(game_stc* game) {
   return 0;
 }
 
-void endGame(game_stc* game) {
+void endGame() {
 
   /* delete all bullets */
   freeBulletList(game);
 
   /* free bullet texture */
   /* SDL_DestroyTexture(game->player.bulletTxtr); */
+
+  /* free player {address, textures} */
+
+  /* free enemies */
+
+  /* free enemy texture */
 
   /* free background textures */
   SDL_DestroyTexture(game->background.nearTxtr);

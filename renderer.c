@@ -3,7 +3,7 @@
 #include "space.h"
 #include <stdio.h>
 
-void clearWindow(game_stc* game) {
+void clearWindow() {
   /* clear screen */
   SDL_RenderClear(game->renderer);
 
@@ -13,7 +13,7 @@ void clearWindow(game_stc* game) {
   SDL_RenderCopy(game->renderer, game->background.nearTxtr, NULL, &game->background.near);
 }
 
-void renderScreen(game_stc* game) {
+void renderScreen() {
   /* Render window */
   SDL_RenderPresent(game->renderer);
 }

@@ -5,7 +5,7 @@
 
 
 
-void initializePlayer(game_stc* game) {
+void initializePlayer() {
   /* setting initial position */
   game->player.hitbox.x = 310;
   game->player.hitbox.y = 380;
@@ -25,50 +25,50 @@ void initializePlayer(game_stc* game) {
   game->player.actionList[119] = &movePlayerRight;
 
   /* initialize player activeActions to 0; */
-  initializeActiveActions(game);
+  initializeActiveActions();
 
   /* configure bullet; */
   game->player.bulletList = NULL;
 
   /* putting player on window, ready for next render */
-  drawPlayer(game);
+  drawPlayer();
 }
 
-void initializeActiveActions(game_stc* game) {
+void initializeActiveActions() {
   int i;
 
   for (i = 0; i < 200; i++)
     game->player.activeActions[i] = 0;
 }
 
-void parsePlayerActions(game_stc* game) {
+void parsePlayerActions() {
   int i;
 
   for (i = 0; i < 200; i++)
     if (game->player.activeActions[i] == 1)
-      game->player.actionList[i](game);
+      game->player.actionList[i]();
 }
 
-void drawPlayer(game_stc* game) {
+void drawPlayer() {
   /* Set render color to blue (player will be rendered in this color) */
   SDL_SetRenderDrawColor(game->renderer,0,0,255,255);
   /* Render player hitbox */
   SDL_RenderFillRect(game->renderer, &game->player.hitbox);
 }
 
-void addPlayerAction(game_stc* game) {
+void addPlayerAction() {
   /* only doing a few, because fuck you for the moment */
   if (game->event.key.keysym.sym == 32 || game->event.key.keysym.sym == 113 || game->event.key.keysym.sym == 119)
     game->player.activeActions[game->event.key.keysym.sym] = 1;
 }
 
-void removePlayerAction(game_stc* game) {
+void removePlayerAction() {
   /* only doing a few, because fuck you for the moment */
   if (game->event.key.keysym.sym == 32 || game->event.key.keysym.sym == 113 || game->event.key.keysym.sym == 119)
     game->player.activeActions[game->event.key.keysym.sym] = 0;
 }
 
-void movePlayerLeft(game_stc* game) {
+void movePlayerLeft() {
   if (game->player.hitbox.x - game->player.speed >= 0)
   {
     game->player.hitbox.x -= game->player.speed;
@@ -79,7 +79,7 @@ void movePlayerLeft(game_stc* game) {
   }
 }
 
-void movePlayerRight(game_stc* game) {
+void movePlayerRight() {
   if (game->player.hitbox.x + game->player.hitbox.w + game->player.speed <= 640)
   {
     game->player.hitbox.x += game->player.speed;
@@ -90,7 +90,7 @@ void movePlayerRight(game_stc* game) {
   }
 }
 
-void fire(game_stc* game) {
+void fire() {
   bullet_stc* bullet;
 
   if (SDL_TICKS_PASSED(SDL_GetTicks(), game->player.cooldown) == 1)

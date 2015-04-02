@@ -3,7 +3,7 @@
 #include "space.h"
 #include <stdio.h>
 
-void manageBulletList(game_stc* game) {
+void manageBulletList() {
   bullet_stc* first;
   bullet_stc* current;
 
@@ -19,7 +19,7 @@ void manageBulletList(game_stc* game) {
     while (current != NULL)
     {
       moveBullet(current);
-      renderBullet(game, current);
+      renderBullet(current);
       if (current->next != NULL)
         current = current->next;
       else
@@ -35,14 +35,14 @@ void moveBullet(bullet_stc* bullet) {
   bullet->hitbox.y -= 3;
 }
 
-void renderBullet(game_stc* game, bullet_stc* bullet) {
+void renderBullet(bullet_stc* bullet) {
   /* Set render color to red (bullet will be rendered in this color) */
   SDL_SetRenderDrawColor(game->renderer,255,0,0,255);
   /* Render player hitbox */
   SDL_RenderFillRect(game->renderer, &bullet->hitbox);
 }
 
-void freeBulletList(game_stc* game) {
+void freeBulletList() {
   bullet_stc* current;
   bullet_stc* toFree;
 

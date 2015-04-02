@@ -3,7 +3,7 @@
 #include "space.h"
 #include <stdio.h>
 
-int eventSwitcher(game_stc* game) {
+int eventSwitcher() {
   /* clear screen */
   clearWindow(game);
 
