@@ -3,12 +3,16 @@
 #include "space.h"
 #include <stdio.h>
 
-int initializeGame() {
+int initialize_game() {
+  /* initializing game globals */
+  GAMEHEIGHT = 420;
+  GAMEWIDTH = 640;
+
   if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     return -1;
 
   /* initializing window   (title, posx, posy, width, height, ..) */
-  game->window = SDL_CreateWindow("Water Evaders",100,200,640,420,0);
+  game->window = SDL_CreateWindow("Water Evaders",100,200,GAMEWIDTH,GAMEHEIGHT,0);
 
   /* initializing renderer   (window, index, rendering flags) */
   game->renderer = SDL_CreateRenderer(game->window,-1,0);
@@ -20,47 +24,41 @@ int initializeGame() {
   game->timer = SDL_GetTicks();
 
   /* setting all textures and loading images */
-  initializeBackground(game);
+  initialize_background();
+
+  /* setting all the landscape blocks */
+  initialize_landscape();
 
   /* call to initialize player */
-  initializePlayer(game);
+  initialize_player();
   return 0;
 }
 
-int initializeBackground() {
-  /* setting box for near */
-  game->background.near.x = -640;
-  game->background.near.y = 0;
-  game->background.near.w = 1920;
-  game->background.near.h = 420;
+void manage_game_actions() {
 
-  /* setting box for mid */
-  game->background.mid.x = -320;
-  game->background.mid.y = 0;
-  game->background.mid.w = 1280;
-  game->background.mid.h = 420;
+  /* manage background moving */
+  manage_background_actions();
 
-  /* setting box for far */
-  game->background.far.x = 0;
-  game->background.far.y = 0;
-  game->background.far.w = 640;
-  game->background.far.h = 420;
+  /* manage landscape blocks, move everything backwards */
+  manage_landscape_actions();
 
-  /* applying textures on boxes */
-  game->background.nearTxtr  = IMG_LoadTexture(game->renderer, "img/near.png");
-  game->background.midTxtr   = IMG_LoadTexture(game->renderer, "img/mid.png");
-  game->background.farTxtr   = IMG_LoadTexture(game->renderer, "img/far.png");
+  /* manage enemies appearing ? manage ennemies moving forwards ... */
 
-  return 0;
+  /* manage powerups appearing ? manage powerups moving forwards ... */
+
+  /* changing music ? (for boss ...) */
+
 }
 
-void endGame() {
+void end_game() {
 
   /* delete all bullets */
-  freeBulletList(game);
+  free_player_bullets();
 
   /* free bullet texture */
-  /* SDL_DestroyTexture(game->player.bulletTxtr); */
+  /* SDL_DestroyTexture(game->player.bullet_texture); */
+
+  /* free landscape blocks ... */
 
   /* free player {address, textures} */
 
@@ -69,9 +67,9 @@ void endGame() {
   /* free enemy texture */
 
   /* free background textures */
-  SDL_DestroyTexture(game->background.nearTxtr);
-  SDL_DestroyTexture(game->background.midTxtr);
-  SDL_DestroyTexture(game->background.farTxtr);
+  SDL_DestroyTexture(game->background.near_texture);
+  SDL_DestroyTexture(game->background.mid_texture);
+  SDL_DestroyTexture(game->background.far_texture);
 
   /* destroy window */
   SDL_DestroyWindow(game->window);

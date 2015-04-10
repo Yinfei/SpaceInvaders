@@ -3,31 +3,35 @@
 #include "space.h"
 #include <stdio.h>
 
-int eventSwitcher() {
+int event_switcher() {
   /* clear screen */
-  clearWindow(game);
+  clear_window();
 
-  /* checking if player quits game */
-  if (SDL_HasEvent(SDL_QUIT) || game->event.type == SDL_QUIT)
-    return -1;
-
-  /* call to function to add/remove player actions */
-  if (game->event.type == SDL_KEYDOWN)
-    addPlayerAction(game);
-  else if (game->event.type == SDL_KEYUP)
-    removePlayerAction(game);
+  /* looping on each event */
+  while (SDL_PollEvent(&game->event))
+  {
+    if (game->event.type == SDL_QUIT)
+      return -1;
+    else if (game->event.type == SDL_KEYDOWN)
+      add_player_action();
+    else if (game->event.type == SDL_KEYUP)
+      remove_player_action();
+  }
 
   /* going through each performable action */
-  parsePlayerActions(game);
-
-  drawPlayer(game);
-
+  manage_player_actions();
   /* parse through bullets */
-  manageBulletList(game);
+  manage_player_bullets();
 
-  /* check player actions. {powerup, takeDamage, die} */
-  /* check enemy actions. {move, shoot, die} */
+  /* check enemy actions. {move, shoot, take damage} */
+  /* manage_enemy_actions(); */
+  /* manage enemy bullets */
+  /* manage_enemy_bullets(); */
+
+
   /* check game actions. {animate background, change music, powerUps} */
+  manage_game_actions();
+
   return 0;
 }
 

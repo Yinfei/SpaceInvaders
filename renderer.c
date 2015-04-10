@@ -3,17 +3,17 @@
 #include "space.h"
 #include <stdio.h>
 
-void clearWindow() {
+void clear_window() {
   /* clear screen */
   SDL_RenderClear(game->renderer);
 
   /* render each background layer (far to near) */
-  SDL_RenderCopy(game->renderer, game->background.farTxtr, NULL, &game->background.far);
-  SDL_RenderCopy(game->renderer, game->background.midTxtr, NULL, &game->background.mid);
-  SDL_RenderCopy(game->renderer, game->background.nearTxtr, NULL, &game->background.near);
+  SDL_RenderCopy(game->renderer, game->background.far_texture, NULL, &game->background.far);
+  SDL_RenderCopy(game->renderer, game->background.mid_texture, NULL, &game->background.mid);
+  SDL_RenderCopy(game->renderer, game->background.near_texture, NULL, &game->background.near);
 }
 
-void renderScreen() {
+void render_screen() {
   /* Render window */
   SDL_RenderPresent(game->renderer);
 }

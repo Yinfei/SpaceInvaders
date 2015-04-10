@@ -4,29 +4,26 @@
 #include <stdio.h>
 
 
-void freeAllEnemies() {
+void free_enemies() {
 
 }
 
-void deleteEnemy() {
+void delete_enemy() {
 
 }
 
-void renderEnemies() {
+void render_enemy() {
 
 }
 
-void moveEnemies() {
+void manage_enemy_actions() {
 
 }
 
-void createEnemy(int id, int* x, int* y) {
-
+void create_enemy(int id, int* x, int* y) {
   /* giving each enemy an id, to make `find and delete` easier */
+  printf("%d %d %d\n", id, *x, *y);
 
-  printf("%d %d %d\n", i, *x, *y);
-
-  /* save first occurence of enemy list */
 
   /* create enemy sctructure */
 
@@ -35,7 +32,7 @@ void createEnemy(int id, int* x, int* y) {
   /* set list to start at this enemy */
 }
 
-void initializeEnemies() {
+void initialize_enemies() {
   /* i is the number of enemies we need to create */
   int i;
   /* x is a track of where we placed the last enemy on X axe */
@@ -46,12 +43,10 @@ void initializeEnemies() {
   /* setting first enemy position */
   x = 10;
   y = 10;
-  /* creating 30 enemies */
-  for (i = 0; i < 30; i++)
+  /* creating 50 enemies */
+  for (i = 0; i < 50; i++)
   {
     /* given as pointer, so we can modify it later */
-    createEnemy(i, &x, &y);
+    create_enemy(i, &x, &y);
   }
-
-  /*  */
 }
