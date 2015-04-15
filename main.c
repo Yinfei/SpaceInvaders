@@ -1,9 +1,9 @@
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
-#include "space.h"
+#include "prototypes.h"
 #include <stdio.h>
 
-/* global t_game* game defined in space.h */
+/* global t_game* game defined in prototypes.h */
 
 int main ()
 {

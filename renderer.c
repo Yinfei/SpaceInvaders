@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
-#include "space.h"
+#include "prototypes.h"
 #include <stdio.h>
 
 void clear_window() {
