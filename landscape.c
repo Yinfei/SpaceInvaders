@@ -4,17 +4,17 @@
 #include <stdio.h>
 
 /* returns next bullet in list */
-block_stc* get_next_block(block_stc* block) {
+t_block* get_next_block(t_block* block) {
   return block->next;
 }
 
-void manage_landscape_actions() {
-  block_stc* current;
-  block_stc* next;
+void landscape_actions() {
+  t_block* current;
+  t_block* next;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
-    current = game->landscape.block;
+    current = g_game->landscape.block;
     while (current != NULL)
     {
       /* check if out of shot */
@@ -36,30 +36,30 @@ void manage_landscape_actions() {
   }
 }
 
-void manage_landscape_damage(block_stc* block) {
+void landscape_damage(t_block* block) {
   block->hp -= 1;
 
   if (block->hp == 0)
     delete_landscape_block(block);
 
   /* add game score */
-  game->score += 10;
+  g_game->score += 10;
 }
 
-void manage_landscape_collisions() {
-  block_stc* current;
-  block_stc* next;
+void landscape_collisions() {
+  t_block* current;
+  t_block* next;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
-    current = game->landscape.block;
+    current = g_game->landscape.block;
     while (current != NULL)
     {
       /* check if out of shot */
-      if (check_landscape_block_collisions(current) > 0)
+      if (check_landscape_collisions(current) > 0)
       {
         next = get_next_block(current);
-        manage_landscape_damage(current);
+        landscape_damage(current);
         current = next;
       }
       else
@@ -68,15 +68,15 @@ void manage_landscape_collisions() {
   }
 }
 
-int check_landscape_block_collisions(block_stc* block) {
-  bullet_stc* current;
+int check_landscape_collisions(t_block* block) {
+  t_bullet* current;
 
-  if (game->player.bullet_list != NULL)
+  if (g_game->player.bullet_list != NULL)
   {
-    current = game->player.bullet_list;
+    current = g_game->player.bullet_list;
     while (current != NULL)
     {
-      if (game_collision_manager(&block->hitbox, &current->hitbox) > 0)
+      if (collision_manager(&block->hitbox, &current->hitbox) > 0)
       {
         delete_player_bullet(current);
         return 1;
@@ -90,14 +90,14 @@ int check_landscape_block_collisions(block_stc* block) {
 
 SDL_Texture* get_landscape_block_texture(int i) {
   if (i == 0)
-    return game->landscape.top_texture;
+    return g_game->landscape.top_texture;
   else if (i == 1)
-    return game->landscape.bottom_texture;
+    return g_game->landscape.bottom_texture;
   else
-    return game->landscape.breakable_texture;
+    return g_game->landscape.breakable_texture;
 }
 
-void render_landscape_block(block_stc* block) {
+void render_landscape_block(t_block* block) {
   SDL_Rect rec;
   if (block->type == 2)
   {
@@ -105,19 +105,19 @@ void render_landscape_block(block_stc* block) {
     rec.y = 0;
     rec.w = 256;
     rec.h = 256;
-    SDL_RenderCopy(game->renderer, get_landscape_block_texture(block->type), &rec, &block->hitbox);
+    SDL_RenderCopy(g_game->renderer, get_landscape_block_texture(block->type), &rec, &block->hitbox);
   }
   else
-    SDL_RenderCopy(game->renderer, get_landscape_block_texture(block->type), NULL, &block->hitbox);
+    SDL_RenderCopy(g_game->renderer, get_landscape_block_texture(block->type), NULL, &block->hitbox);
 }
 
-void initialize_landscape() {
-  game->landscape.block = NULL;
+void init_landscape() {
+  g_game->landscape.block = NULL;
 
   /* initialize textures */
-  game->landscape.top_texture = IMG_LoadTexture(game->renderer, "img/top_block.png");
-  game->landscape.bottom_texture  = IMG_LoadTexture(game->renderer, "img/bottom_block.png");
-  game->landscape.breakable_texture  = IMG_LoadTexture(game->renderer, "img/block.png");
+  g_game->landscape.top_texture = IMG_LoadTexture(g_game->renderer, "img/top_block.png");
+  g_game->landscape.bottom_texture  = IMG_LoadTexture(g_game->renderer, "img/bottom_block.png");
+  g_game->landscape.breakable_texture  = IMG_LoadTexture(g_game->renderer, "img/block.png");
 
 
   /* creating on of each type, for test purposes */
@@ -128,13 +128,13 @@ void initialize_landscape() {
 
 
   /* render landscape blocks */
-  manage_landscape_actions();
+  landscape_actions();
 }
 
 void create_landscape_top_block(int x, int w, int h) {
-  block_stc* block;
+  t_block* block;
 
-  block = malloc(sizeof (block_stc));
+  block = malloc(sizeof (t_block));
   block->hitbox.x = x;
   block->hitbox.y = 0;
   block->hitbox.w = w;
@@ -145,22 +145,22 @@ void create_landscape_top_block(int x, int w, int h) {
   /* setting block hp to -1 (because unbreakable) */
   block->hp = -1;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
-    block->next = game->landscape.block;
-    game->landscape.block->prev = block;
+    block->next = g_game->landscape.block;
+    g_game->landscape.block->prev = block;
   }
   else
     block->next = NULL;
-  game->landscape.block = block;
+  g_game->landscape.block = block;
 }
 
 void create_landscape_bottom_block(int x, int w, int h) {
-  block_stc* block;
+  t_block* block;
 
-  block = malloc(sizeof (block_stc));
+  block = malloc(sizeof (t_block));
   block->hitbox.x = x;
-  block->hitbox.y = GAMEHEIGHT - h;
+  block->hitbox.y = g_window_height - h;
   block->hitbox.w = w;
   block->hitbox.h = h;
   block->prev = NULL;
@@ -169,21 +169,21 @@ void create_landscape_bottom_block(int x, int w, int h) {
   /* setting block hp to -1 (because unbreakable) */
   block->hp = -1;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
-    block->next = game->landscape.block;
-    game->landscape.block->prev = block;
+    block->next = g_game->landscape.block;
+    g_game->landscape.block->prev = block;
   }
   else
     block->next = NULL;
 
-  game->landscape.block = block;
+  g_game->landscape.block = block;
 }
 
 void create_landscape_breakable_block(int x, int y, int w, int h) {
-  block_stc* block;
+  t_block* block;
 
-  block = malloc(sizeof (block_stc));
+  block = malloc(sizeof (t_block));
   block->hitbox.x = x;
   block->hitbox.y = y;
   block->hitbox.w = w;
@@ -194,29 +194,29 @@ void create_landscape_breakable_block(int x, int y, int w, int h) {
   /* setting block hp to 3 (three hits to break) */
   block->hp = 3;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
-    block->next = game->landscape.block;
-    game->landscape.block->prev = block;
+    block->next = g_game->landscape.block;
+    g_game->landscape.block->prev = block;
   }
   else
     block->next = NULL;
 
-  game->landscape.block = block;
+  g_game->landscape.block = block;
 }
 
 
-void move_landscape_block(block_stc* block) {
+void move_landscape_block(t_block* block) {
   block->hitbox.x -= 1;
 
   /* check for collisions with player */
-  if (game_collision_manager(&game->player.hitbox, &block->hitbox) > 0)
+  if (collision_manager(&g_game->player.hitbox, &block->hitbox) > 0)
     /* if so, push player */
-    game->player.hitbox.x -= 1;
+    g_game->player.hitbox.x -= 1;
 }
 
 
-void delete_landscape_block(block_stc* block) {
+void delete_landscape_block(t_block* block) {
   /* setting the previous block pointer for "next block" as current block "next block" pointer */
   if (block->prev != NULL)
   {
@@ -226,31 +226,31 @@ void delete_landscape_block(block_stc* block) {
   }
   else
   {
-    game->landscape.block = block->next;
+    g_game->landscape.block = block->next;
     if (block->next != NULL)
-      game->landscape.block->prev = NULL;
+      g_game->landscape.block->prev = NULL;
   }
   /* freeing block space */
   free(block);
 }
 
 void free_landscape_blocks() {
-  block_stc* current;
-  block_stc* toFree;
+  t_block* current;
+  t_block* to_free;
 
-  if (game->landscape.block != NULL)
+  if (g_game->landscape.block != NULL)
   {
     /* creating value to parsethough */
-    current = game->landscape.block;
-    toFree  = current;
+    current = g_game->landscape.block;
+    to_free  = current;
     /* parse through each bullet, free each one */
     while (current != NULL)
     {
       if (current->next != NULL)
       {
         current = current->next;
-        free(toFree);
-        toFree = current;
+        free(to_free);
+        to_free = current;
       }
       else
       {
@@ -262,9 +262,9 @@ void free_landscape_blocks() {
 }
 
 void free_landscape_textures() {
-  SDL_DestroyTexture(game->landscape.top_texture);
-  SDL_DestroyTexture(game->landscape.bottom_texture);
-  SDL_DestroyTexture(game->landscape.breakable_texture);
+  SDL_DestroyTexture(g_game->landscape.top_texture);
+  SDL_DestroyTexture(g_game->landscape.bottom_texture);
+  SDL_DestroyTexture(g_game->landscape.breakable_texture);
 }
 
 void free_landscape() {

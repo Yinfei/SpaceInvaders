@@ -3,29 +3,29 @@
 #include "space.h"
 #include <stdio.h>
 
-/* global game_stc* game defined in space.h */
+/* global t_game* game defined in space.h */
 
 int main ()
 {
   /* creating a game structure */
-  game_stc newGame;
+  t_game new_game;
   /* initializing global game "object" */
-  game = &newGame;
+  g_game = &new_game;
   /* initializing game */
-  if (initialize_game() < 0)
+  if (init_game() < 0)
     return error();
   /* starting main game loop */
-  while (game->running)
+  while (g_game->running)
   {
     /* check if 16 ms have gone by since last render */
-    if (SDL_TICKS_PASSED(SDL_GetTicks(), game->timer) == 1)
+    if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->timer) == 1)
     {
       /* setting next game render time */
-      game->timer = SDL_GetTicks() + 16;
+      g_game->timer = SDL_GetTicks() + 16;
       /* check if player quits game, parse game and player actions */
       if (event_switcher() != -1)
         /* render game screen */
-        render_screen();
+        render_window();
       else
         /* exit */
         break;

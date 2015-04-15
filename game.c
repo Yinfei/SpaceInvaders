@@ -3,54 +3,54 @@
 #include "space.h"
 #include <stdio.h>
 
-int initialize_game() {
+int init_game() {
   /* initializing game globals */
-  GAMEHEIGHT = 420;
-  GAMEWIDTH = 640;
+  g_window_height = 420;
+  g_window_width = 640;
 
   if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     return -1;
 
   /* initializing window   (title, posx, posy, width, height, ..) */
-  game->window = SDL_CreateWindow("DUBSTEP CAT !",100,200,GAMEWIDTH,GAMEHEIGHT,0);
+  g_game->window = SDL_CreateWindow("DUBSTEP CAT !",100,200,g_window_width,g_window_height,0);
 
   /* initializing renderer   (window, index, rendering flags) */
-  game->renderer = SDL_CreateRenderer(game->window,-1,0);
+  g_game->renderer = SDL_CreateRenderer(g_game->window,-1,0);
 
   /* initialize variable to know if we keep going in the game */
-  game->running = 1;
+  g_game->running = 1;
 
   /* initialize game score */
-  game->score = 0;
+  g_game->score = 0;
 
   /* initialize timer */
-  game->timer = SDL_GetTicks();
+  g_game->timer = SDL_GetTicks();
 
   /* setting all textures and loading images */
-  initialize_background();
+  init_background();
 
   /* setting all the landscape blocks */
-  initialize_landscape();
+  init_landscape();
 
   /* call to initialize player */
-  initialize_player();
+  init_player();
 
   /* call to initialize enemies */
-  initialize_enemies();
+  init_enemies();
 
   return 0;
 }
 
-void manage_game_actions() {
+void game_actions() {
 
   /* manage background moving */
-  manage_background_actions();
+  background_actions();
 
   /* manage landscape blocks, move everything backwards */
-  manage_landscape_actions();
+  landscape_actions();
 
   /* manage landscape collisions with player bullets */
-  manage_landscape_collisions();
+  landscape_collisions();
 
   /* manage powerups appearing ? manage powerups moving forwards ... */
 
@@ -65,7 +65,7 @@ void end_game() {
   free_background();
 
   /* destroy window */
-  SDL_DestroyWindow(game->window);
+  SDL_DestroyWindow(g_game->window);
   /* exit SDL */
   SDL_Quit();
 }

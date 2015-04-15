@@ -5,15 +5,15 @@
 
 void clear_window() {
   /* clear screen */
-  SDL_RenderClear(game->renderer);
+  SDL_RenderClear(g_game->renderer);
 
   /* render each background layer (far to near) */
-  SDL_RenderCopy(game->renderer, game->background.far_texture, NULL, &game->background.far);
-  SDL_RenderCopy(game->renderer, game->background.mid_texture, NULL, &game->background.mid);
-  SDL_RenderCopy(game->renderer, game->background.near_texture, NULL, &game->background.near);
+  SDL_RenderCopy(g_game->renderer, g_game->background.far_texture, NULL, &g_game->background.far);
+  SDL_RenderCopy(g_game->renderer, g_game->background.mid_texture, NULL, &g_game->background.mid);
+  SDL_RenderCopy(g_game->renderer, g_game->background.near_texture, NULL, &g_game->background.near);
 }
 
-void render_screen() {
+void render_window() {
   /* Render window */
-  SDL_RenderPresent(game->renderer);
+  SDL_RenderPresent(g_game->renderer);
 }

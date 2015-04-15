@@ -3,30 +3,30 @@
 #include "space.h"
 #include <stdio.h>
 
-int game_collision_manager(SDL_Rect* first, SDL_Rect* second) {
+int collision_manager(SDL_Rect* r1, SDL_Rect* r2) {
   /* check all four corners of each rectangle, to see one is inside the other */
   int collision;
 
   collision = 0;
-  collision += check_top_left_collision(first, second);
-  collision += check_top_right_collision(first, second);
-  collision += check_bottom_left_collision(first, second);
-  collision += check_bottom_right_collision(first, second);
+  collision += check_top_left_collision(r1, r2);
+  collision += check_top_right_collision(r1, r2);
+  collision += check_bottom_left_collision(r1, r2);
+  collision += check_bottom_right_collision(r1, r2);
 
-  /* acually checking only one corner for second one should be fine, juste to make sure second is not inside first */
+  /* acually checking only one corner for r2 one should be fine, juste to make sure r2 is not inside r1 */
 
-  collision += check_top_left_collision(second, first);
-  collision += check_top_right_collision(second, first);
-  collision += check_bottom_left_collision(second, first);
-  collision += check_bottom_right_collision(second, first);
+  collision += check_top_left_collision(r2, r1);
+  collision += check_top_right_collision(r2, r1);
+  collision += check_bottom_left_collision(r2, r1);
+  collision += check_bottom_right_collision(r2, r1);
 
   return collision;
 }
 
-int check_top_left_collision(SDL_Rect* r, SDL_Rect* s) {
-  if (r->x >= s->x && r->x <= (s->x + s->w))
+int check_top_left_collision(SDL_Rect* r1, SDL_Rect* r2) {
+  if (r1->x >= r2->x && r1->x <= (r2->x + r2->w))
   {
-    if (r->y >= s->y && r->y <= (s->y + s->h))
+    if (r1->y >= r2->y && r1->y <= (r2->y + r2->h))
       return 1;
     else
       return 0;
@@ -35,10 +35,10 @@ int check_top_left_collision(SDL_Rect* r, SDL_Rect* s) {
     return 0;
 }
 
-int check_top_right_collision(SDL_Rect* r, SDL_Rect* s) {
-  if ((r->x + r->w) >= s->x && (r->x + r->w) <= (s->x + s->w))
+int check_top_right_collision(SDL_Rect* r1, SDL_Rect* r2) {
+  if ((r1->x + r1->w) >= r2->x && (r1->x + r1->w) <= (r2->x + r2->w))
   {
-    if (r->y >= s->y && r->y <= (s->y + s->h))
+    if (r1->y >= r2->y && r1->y <= (r2->y + r2->h))
       return 1;
     else
       return 0;
@@ -47,11 +47,10 @@ int check_top_right_collision(SDL_Rect* r, SDL_Rect* s) {
     return 0;
 }
 
-int check_bottom_left_collision(SDL_Rect* r, SDL_Rect* s) {
-
-  if (r->x >= s->x && r->x <= (s->x + s->w))
+int check_bottom_left_collision(SDL_Rect* r1, SDL_Rect* r2) {
+  if (r1->x >= r2->x && r1->x <= (r2->x + r2->w))
   {
-    if ((r->y + r->h) >= s->y && (r->y + r->h) <= (s->y + s->h))
+    if ((r1->y + r1->h) >= r2->y && (r1->y + r1->h) <= (r2->y + r2->h))
       return 1;
     else
       return 0;
@@ -60,10 +59,10 @@ int check_bottom_left_collision(SDL_Rect* r, SDL_Rect* s) {
     return 0;
 }
 
-int check_bottom_right_collision(SDL_Rect* r, SDL_Rect* s) {
-  if ((r->x + r->w) >= s->x && (r->x + r->w) <= (s->x + s->w))
+int check_bottom_right_collision(SDL_Rect* r1, SDL_Rect* r2) {
+  if ((r1->x + r1->w) >= r2->x && (r1->x + r1->w) <= (r2->x + r2->w))
   {
-    if ((r->y + r->h) >= s->y && (r->y + r->h) <= (s->y + s->h))
+    if ((r1->y + r1->h) >= r2->y && (r1->y + r1->h) <= (r2->y + r2->h))
       return 1;
     else
       return 0;

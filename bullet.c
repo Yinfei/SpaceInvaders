@@ -4,22 +4,22 @@
 #include <stdio.h>
 
 /* returns next bullet in list */
-bullet_stc* get_next_bullet(bullet_stc* bullet) {
+t_bullet* get_next_bullet(t_bullet* bullet) {
   return bullet->next;
 }
 
 /* parses through bullet list, moves and renders them */
-void manage_player_bullets() {
-  bullet_stc* current;
-  bullet_stc* next;
+void player_bullets() {
+  t_bullet* current;
+  t_bullet* next;
 
-  if (game->player.bullet_list != NULL)
+  if (g_game->player.bullet_list != NULL)
   {
-    current = game->player.bullet_list;
+    current = g_game->player.bullet_list;
     while (current != NULL)
     {
       /* check if out of shot */
-      if (current->hitbox.x > GAMEWIDTH)
+      if (current->hitbox.x > g_window_width)
       {
         /* set next bullet */
         next = get_next_bullet(current);
@@ -30,7 +30,7 @@ void manage_player_bullets() {
       else
       {
         move_bullet(current);
-        draw_player_bullet(current);
+        render_player_bullet(current);
         current = get_next_bullet(current);
       }
     }
@@ -38,13 +38,13 @@ void manage_player_bullets() {
 }
 
 /* parsed through enemy bullets, moves and renders them */
-void manage_enemy_bullets() {
-  bullet_stc* current;
-  bullet_stc* next;
+void enemy_bullets() {
+  t_bullet* current;
+  t_bullet* next;
 
-  if (game->enemies->bullet_list != NULL)
+  if (g_game->enemies->bullet_list != NULL)
   {
-    current = game->enemies->bullet_list;
+    current = g_game->enemies->bullet_list;
     while (current != NULL)
     {
       /* check if out of shot */
@@ -59,7 +59,7 @@ void manage_enemy_bullets() {
       else
       {
         move_bullet(current);
-        draw_enemy_bullet(current);
+        render_enemy_bullet(current);
         current = get_next_bullet(current);
       }
     }
@@ -67,7 +67,7 @@ void manage_enemy_bullets() {
 }
 
 /* deletes and frees specific bullet from enemy bullet list */
-void delete_enemy_bullet(bullet_stc* bullet) {
+void delete_enemy_bullet(t_bullet* bullet) {
   /* setting the previous bullet pointer for "next bullet" as current bullet "next bullet" pointer */
   if (bullet->prev != NULL)
   {
@@ -77,37 +77,37 @@ void delete_enemy_bullet(bullet_stc* bullet) {
   }
   else
   {
-    game->enemies->bullet_list = bullet->next;
+    g_game->enemies->bullet_list = bullet->next;
     if (bullet->next != NULL)
-      game->enemies->bullet_list->prev = NULL;
+      g_game->enemies->bullet_list->prev = NULL;
   }
   /* freeing bullet space */
   free(bullet);
 }
 
-void move_bullet(bullet_stc* bullet) {
+void move_bullet(t_bullet* bullet) {
   bullet->hitbox.x += bullet->x;
   bullet->hitbox.y += bullet->y;
 }
 
 /* draws bullet on the screen */
-void draw_player_bullet(bullet_stc* bullet) {
+void render_player_bullet(t_bullet* bullet) {
   /* Set render color to red (bullet will be rendered in this color) */
-  SDL_SetRenderDrawColor(game->renderer,255,0,0,255);
+  SDL_SetRenderDrawColor(g_game->renderer,255,0,0,255);
   /* Render player hitbox */
-  SDL_RenderFillRect(game->renderer, &bullet->hitbox);
+  SDL_RenderFillRect(g_game->renderer, &bullet->hitbox);
 }
 
 /* draws bullet on the screen */
-void draw_enemy_bullet(bullet_stc* bullet) {
+void render_enemy_bullet(t_bullet* bullet) {
   /* Set render color to red (bullet will be rendered in this color) */
-  SDL_SetRenderDrawColor(game->renderer,0,255,0,255);
+  SDL_SetRenderDrawColor(g_game->renderer,0,255,0,255);
   /* Render player hitbox */
-  SDL_RenderFillRect(game->renderer, &bullet->hitbox);
+  SDL_RenderFillRect(g_game->renderer, &bullet->hitbox);
 }
 
 /* called when a bullet hits an enemy or when a bullet goes further than the screen */
-void delete_player_bullet(bullet_stc* bullet) {
+void delete_player_bullet(t_bullet* bullet) {
   /* setting the previous bullets pointer for "next bullet" as current bullets "next bullet" pointer */
   if (bullet->prev != NULL)
   {
@@ -117,9 +117,9 @@ void delete_player_bullet(bullet_stc* bullet) {
   }
   else
   {
-    game->player.bullet_list = bullet->next;
+    g_game->player.bullet_list = bullet->next;
     if (bullet->next != NULL)
-      game->player.bullet_list->prev = NULL;
+      g_game->player.bullet_list->prev = NULL;
   }
   /* freeing bullet space */
   free(bullet);
@@ -127,22 +127,22 @@ void delete_player_bullet(bullet_stc* bullet) {
 
 /* called at the end of the game, to free each bullet */
 void free_player_bullets() {
-  bullet_stc* current;
-  bullet_stc* toFree;
+  t_bullet* current;
+  t_bullet* next;
 
-  if (game->player.bullet_list != NULL)
+  if (g_game->player.bullet_list != NULL)
   {
     /* creating value to parsethough */
-    current = game->player.bullet_list;
-    toFree  = current;
+    current = g_game->player.bullet_list;
+    next = current;
     /* parse through each bullet, free each one */
     while (current != NULL)
     {
       if (current->next != NULL)
       {
-        current = current->next;
-        free(toFree);
-        toFree = current;
+        next = current->next;
+        free(current);
+        current = next;
       }
       else
       {
