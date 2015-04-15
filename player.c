@@ -39,7 +39,7 @@ void init_player() {
   /* if ever this time has passed, he can take damage again */
   g_game->player.damage_cooldown = 0;
   /* loading player sprite */
-  g_game->player.texture = IMG_LoadTexture(g_game->renderer, "img/dubstepcat.png");
+  g_game->player.texture = IMG_LoadTexture(g_game->renderer, "assets/images/dubstepcat.png");
   /* Initialize player action list */
   init_player_actions();
   /* initialize player active_actions to 0; */

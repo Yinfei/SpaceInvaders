@@ -291,7 +291,7 @@ void init_enemies() {
   /* initialize enemy list */
   g_game->enemies->enemy_list = NULL;
   /* loading flyer sprite */
-  g_game->enemies->flyer_texture = IMG_LoadTexture(g_game->renderer, "img/fatcat.png");
+  g_game->enemies->flyer_texture = IMG_LoadTexture(g_game->renderer, "assets/images/fatcat.png");
   /* creating enemy for test purposes */
   create_enemy();
   /* setting bullet list to null */
