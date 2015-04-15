@@ -18,14 +18,11 @@ int event_switcher() {
       remove_player_action();
   }
 
-
   /* some examples for dying */
   if (g_game->player.hitbox.x + g_game->player.hitbox.w <= 0)
     return -1;
   if (g_game->player.hp <= 0)
     return -1;
-
-
 
   /* going through each performable action */
   player_actions();
@@ -33,7 +30,6 @@ int event_switcher() {
   enemies_actions();
   /* check game actions. {animate background, change music, powerUps} */
   game_actions();
-
   return 0;
 }
 

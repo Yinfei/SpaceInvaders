@@ -42,11 +42,8 @@ void free_enemies() {
 }
 
 void custom_enemy_movement(t_enemy* enemy) {
-
   /* change this to some sort of custom movement (oscilation, rotation, linear) */
   enemy->hitbox.y = enemy->hitbox.y;
-
-
 }
 
 void enemy_bullet_direction(t_bullet* bullet) {
@@ -104,7 +101,6 @@ void check_enemy_fire(t_enemy* enemy) {
   if (SDL_TICKS_PASSED(SDL_GetTicks(), enemy->cooldown) == 1)
   {
     i = rand() % 100;
-
     /* 1/100 chance to fire, every 16 ms (if no cooldown) */
     if (i == 1 && enemy->hitbox.x >= g_game->player.hitbox.x)
     {
@@ -275,13 +271,10 @@ void create_enemy() {
   enemy->hitbox.w = 70;
   enemy->hitbox.h = 50;
   enemy->prev = NULL;
-
   enemy->hp = 2;
   enemy->cooldown = 0;
-
   /* trying with enemy time = 0 (flyer?) */
   enemy->type = 0;
-
   /* checking if enemy list is empty */
   if (g_game->enemies->enemy_list != NULL)
   {
@@ -292,20 +285,15 @@ void create_enemy() {
     enemy->next = NULL;
   /* setting start of enemy list to current enemy */
   g_game->enemies->enemy_list = enemy;
-
 }
 
 void init_enemies() {
   /* initialize enemy list */
   g_game->enemies->enemy_list = NULL;
-
   /* loading flyer sprite */
   g_game->enemies->flyer_texture = IMG_LoadTexture(g_game->renderer, "img/fatcat.png");
-
   /* creating enemy for test purposes */
   create_enemy();
-
-
   /* setting bullet list to null */
   g_game->enemies->bullet_list = NULL;
 }

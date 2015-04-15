@@ -119,13 +119,10 @@ void init_landscape() {
   g_game->landscape.bottom_texture  = IMG_LoadTexture(g_game->renderer, "img/bottom_block.png");
   g_game->landscape.breakable_texture  = IMG_LoadTexture(g_game->renderer, "img/block.png");
 
-
   /* creating on of each type, for test purposes */
-
-    create_landscape_top_block(600, 150, 150);
-    create_landscape_bottom_block(510, 230, 230);
-    create_landscape_breakable_block(640, 150, 40, 40);
-
+  create_landscape_top_block(600, 150, 150);
+  create_landscape_bottom_block(510, 230, 230);
+  create_landscape_breakable_block(640, 150, 40, 40);
 
   /* render landscape blocks */
   landscape_actions();
@@ -205,7 +202,6 @@ void create_landscape_breakable_block(int x, int y, int w, int h) {
   g_game->landscape.block = block;
 }
 
-
 void move_landscape_block(t_block* block) {
   block->hitbox.x -= 1;
 
@@ -272,6 +268,4 @@ void free_landscape() {
   free_landscape_blocks();
   /* free landscape textures */
   free_landscape_textures();
-
-
 }

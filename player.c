@@ -19,7 +19,6 @@ void init_player_actions() {
 void free_player() {
   /* delete all bullets */
   free_player_bullets();
-
   /* freeing all textures */
   SDL_DestroyTexture(g_game->player.texture);
   /* SDL_DestroyTexture(g_game->player.bullet_texture); */
@@ -31,7 +30,6 @@ void init_player() {
   g_game->player.hitbox.y = 200;
   g_game->player.hitbox.w = 45;
   g_game->player.hitbox.h = 30;
-
   /* how many pixels will he move every 16ms */
   g_game->player.speed    = 3;
   /* how many times can he be hit */
@@ -40,18 +38,14 @@ void init_player() {
   g_game->player.cooldown = 0;
   /* if ever this time has passed, he can take damage again */
   g_game->player.damage_cooldown = 0;
-
   /* loading player sprite */
   g_game->player.texture = IMG_LoadTexture(g_game->renderer, "img/dubstepcat.png");
-
   /* Initialize player action list */
   init_player_actions();
   /* initialize player active_actions to 0; */
   init_active_player_actions();
-
   /* configure bullet list */
   g_game->player.bullet_list = NULL;
-
   /* putting player on window, ready for next render */
   render_player();
 }
@@ -82,7 +76,6 @@ void player_collisions() {
       current = next;
     }
   }
-
   /* go through power ups ? */
 }
 
@@ -93,23 +86,20 @@ void player_actions() {
     if (g_game->player.active_actions[i] == 1 && g_game->player.action_list[i] != NULL)
       g_game->player.action_list[i]();
 
-
   /* check for taking damage/power up here ? */
   player_collisions();
-
   /* parse through bullets */
   player_bullets();
-
   render_player();
 }
 
 void render_player() {
   SDL_Rect rect;
+
   rect.x = ((SDL_GetTicks() / 50) % 3) * 150;
   rect.y = 0;
   rect.w = 150;
   rect.h = 100;
-
   SDL_RenderCopy(g_game->renderer, g_game->player.texture, &rect, &g_game->player.hitbox);
 }
 
@@ -217,4 +207,3 @@ int damage_player(int i) {
   else
     return 0;
 }
-

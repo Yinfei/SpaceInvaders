@@ -6,7 +6,6 @@
 void clear_window() {
   /* clear screen */
   SDL_RenderClear(g_game->renderer);
-
   /* render each background layer (far to near) */
   SDL_RenderCopy(g_game->renderer, g_game->background.far_texture, NULL, &g_game->background.far);
   SDL_RenderCopy(g_game->renderer, g_game->background.mid_texture, NULL, &g_game->background.mid);
