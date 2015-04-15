@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
 #include "prototypes.h"
-#include <stdio.h>
 
 int init_game() {
   /* initializing game globals */

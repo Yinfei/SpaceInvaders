@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
 #include "../main/prototypes.h"
-#include <stdio.h>
 
 /* returns next bullet in list */
 t_block* get_next_block(t_block* block) {

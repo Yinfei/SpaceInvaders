@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
 #include "prototypes.h"
-#include <stdio.h>
 
 /* global t_game* game defined in prototypes.h */
 

@@ -1,5 +1,8 @@
 #ifndef SPACE_H_
 # define SPACE_H_
+#include <SDL2/SDL.h>
+#include <SDL_image.h>
+#include <stdio.h>
 
 struct  s_game;
 struct  s_player;

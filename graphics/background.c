@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
 #include "../main/prototypes.h"
-#include <stdio.h>
 
 int init_background() {
   /* setting box for near */
