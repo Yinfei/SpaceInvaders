@@ -16,11 +16,20 @@ void initialize_player_actions() {
   game->player.action_list[115] = &move_player_down;
 }
 
+void free_player() {
+  /* delete all bullets */
+  free_player_bullets();
+
+  /* freeing all textures */
+  SDL_DestroyTexture(game->player.texture);
+  /* SDL_DestroyTexture(game->player.bullet_texture); */
+}
+
 void initialize_player() {
   /* setting initial position */
   game->player.hitbox.x = 10;
   game->player.hitbox.y = 200;
-  game->player.hitbox.w = 30;
+  game->player.hitbox.w = 45;
   game->player.hitbox.h = 30;
 
   /* how many pixels will he move every 16ms */
@@ -29,6 +38,11 @@ void initialize_player() {
   game->player.hp       = 3;
   /* if ever this time has passed, he can shot again */
   game->player.cooldown = 0;
+  /* if ever this time has passed, he can take damage again */
+  game->player.damage_cooldown = 0;
+
+  /* loading player sprite */
+  game->player.texture = IMG_LoadTexture(game->renderer, "img/dubstepcat.png");
 
   /* Initialize player action list */
   initialize_player_actions();
@@ -49,6 +63,29 @@ void initialize_active_player_actions() {
     game->player.active_actions[i] = 0;
 }
 
+void manage_player_collisions() {
+  /* go through enemy bullets */
+  bullet_stc* current;
+  bullet_stc* next;
+
+  if (game->enemies->bullet_list != NULL)
+  {
+    current = game->enemies->bullet_list;
+    while (current != NULL)
+    {
+      next = get_next_bullet(current);
+      if (game_collision_manager(&current->hitbox, &game->player.hitbox) > 0)
+      {
+        player_take_damage(1);
+        delete_enemy_bullet(current);
+      }
+      current = next;
+    }
+  }
+
+  /* go through power ups ? */
+}
+
 void manage_player_actions() {
   int i;
 
@@ -58,16 +95,22 @@ void manage_player_actions() {
 
 
   /* check for taking damage/power up here ? */
+  manage_player_collisions();
 
+  /* parse through bullets */
+  manage_player_bullets();
 
   draw_player();
 }
 
 void draw_player() {
-  /* Set render color to blue (player will be rendered in this color) */
-  SDL_SetRenderDrawColor(game->renderer,0,0,255,255);
-  /* Render player hitbox */
-  SDL_RenderFillRect(game->renderer, &game->player.hitbox);
+  SDL_Rect rect;
+  rect.x = ((SDL_GetTicks() / 50) % 3) * 150;
+  rect.y = 0;
+  rect.w = 150;
+  rect.h = 100;
+
+  SDL_RenderCopy(game->renderer, game->player.texture, &rect, &game->player.hitbox);
 }
 
 void add_player_action() {
@@ -80,24 +123,59 @@ void remove_player_action() {
     game->player.active_actions[game->event.key.keysym.sym] = 0;
 }
 
-void move_player_left() {
-  if (game->player.hitbox.x - game->player.speed >= 0)
-    game->player.hitbox.x -= game->player.speed;
+int simulate_player_collision() {
+  /* parse through landscape, to see if player is allowed to move there */
+  block_stc* current;
+
+  if (game->landscape.block != NULL)
+  {
+    current = game->landscape.block;
+    while (current != NULL)
+    {
+      /* check if out of shot */
+      if (game_collision_manager(&game->player.hitbox, &current->hitbox) > 0)
+        return 1;
+      else
+        current = get_next_block(current);
+    }
+  }
+  return 0;
 }
 
-void move_player_right() {
-  if (game->player.hitbox.x + game->player.hitbox.w + game->player.speed <= 640)
+void move_player_left() {
+  game->player.hitbox.x -= game->player.speed;
+
+  if (game->player.hitbox.x < 0)
+    game->player.hitbox.x += game->player.speed;
+  else if (simulate_player_collision() > 0)
     game->player.hitbox.x += game->player.speed;
 }
 
+void move_player_right() {
+  game->player.hitbox.x += game->player.speed;
+
+  if (game->player.hitbox.x + game->player.hitbox.w > GAMEWIDTH)
+    game->player.hitbox.x -= game->player.speed;
+  else if (simulate_player_collision() > 0)
+    game->player.hitbox.x -= game->player.speed;
+}
+
 void move_player_up() {
-  if (game->player.hitbox.y - game->player.speed >= 0)
-    game->player.hitbox.y -= game->player.speed;
+  game->player.hitbox.y -= game->player.speed;
+
+  if (game->player.hitbox.y < 0)
+    game->player.hitbox.y += game->player.speed;
+  else if (simulate_player_collision() > 0)
+    game->player.hitbox.y += game->player.speed;
 }
 
 void move_player_down() {
-  if (game->player.hitbox.y + game->player.hitbox.h + game->player.speed <= 420)
-    game->player.hitbox.y += game->player.speed;
+  game->player.hitbox.y += game->player.speed;
+
+  if (game->player.hitbox.y + game->player.hitbox.h > GAMEHEIGHT)
+    game->player.hitbox.y -= game->player.speed;
+  else if (simulate_player_collision() > 0)
+    game->player.hitbox.y -= game->player.speed;
 }
 
 void fire() {
@@ -112,21 +190,31 @@ void fire() {
     bullet->hitbox.y = game->player.hitbox.y + (game->player.hitbox.h / 2);
     bullet->hitbox.w = 3;
     bullet->hitbox.h = 3;
+    /* setting bullet vector (vector = speed and direction) */
+    bullet->x = 5;
+    bullet->y = 0;
     bullet->prev = NULL;
     /* checking if bullet list is empty */
     if (game->player.bullet_list != NULL)
     {
       bullet->next = game->player.bullet_list;
-      bullet->id   = game->player.bullet_list->id + 1;
       game->player.bullet_list->prev = bullet;
     }
     else
-    {
       bullet->next = NULL;
-      bullet->id   = 0;
-    }
     /* setting start of bullet list to current bullet */
     game->player.bullet_list = bullet;
   }
+}
+
+int player_take_damage(int i) {
+  if (SDL_TICKS_PASSED(SDL_GetTicks(), game->player.damage_cooldown) == 1)
+  {
+    game->player.hp -= i;
+    game->player.damage_cooldown = SDL_GetTicks() + 500;
+    return 1;
+  }
+  else
+    return 0;
 }
 

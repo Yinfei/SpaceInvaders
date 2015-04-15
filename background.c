@@ -37,6 +37,12 @@ void manage_background_actions() {
   if (game->background.mid.x <= -600)
     game->background.mid.x = 0;
 
-  game->background.near.x -= 3;
-  game->background.mid.x -= 2;
+  game->background.near.x -= 2;
+  game->background.mid.x -= 1;
+}
+
+void free_background() {
+  SDL_DestroyTexture(game->background.near_texture);
+  SDL_DestroyTexture(game->background.mid_texture);
+  SDL_DestroyTexture(game->background.far_texture);
 }

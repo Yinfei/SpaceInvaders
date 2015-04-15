@@ -18,17 +18,19 @@ int event_switcher() {
       remove_player_action();
   }
 
+
+  /* some examples for dying */
+  if (game->player.hitbox.x + game->player.hitbox.w <= 0)
+    return -1;
+  if (game->player.hp <= 0)
+    return -1;
+
+
+
   /* going through each performable action */
   manage_player_actions();
-  /* parse through bullets */
-  manage_player_bullets();
-
-  /* check enemy actions. {move, shoot, take damage} */
-  /* manage_enemy_actions(); */
-  /* manage enemy bullets */
-  /* manage_enemy_bullets(); */
-
-
+  /* check enemy actions. {shoot, take damage} */
+  manage_enemies_actions();
   /* check game actions. {animate background, change music, powerUps} */
   manage_game_actions();
 
