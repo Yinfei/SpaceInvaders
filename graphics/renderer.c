@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
-#include "space.h"
-#include <stdio.h>
+#include "../main/prototypes.h"
 
 void clear_window() {
   /* clear screen */

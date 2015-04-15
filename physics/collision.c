@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
-#include "space.h"
-#include <stdio.h>
+#include "../main/prototypes.h"
 
 int collision_manager(SDL_Rect* r1, SDL_Rect* r2) {
   /* check all four corners of each rectangle, to see one is inside the other */

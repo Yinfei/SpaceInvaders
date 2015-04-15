@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
-#include "space.h"
-#include <stdio.h>
+#include "../main/prototypes.h"
 
 /* returns next bullet in list */
 t_block* get_next_block(t_block* block) {
@@ -115,9 +112,9 @@ void init_landscape() {
   g_game->landscape.block = NULL;
 
   /* initialize textures */
-  g_game->landscape.top_texture = IMG_LoadTexture(g_game->renderer, "img/top_block.png");
-  g_game->landscape.bottom_texture  = IMG_LoadTexture(g_game->renderer, "img/bottom_block.png");
-  g_game->landscape.breakable_texture  = IMG_LoadTexture(g_game->renderer, "img/block.png");
+  g_game->landscape.top_texture = IMG_LoadTexture(g_game->renderer, "assets/images/top_block.png");
+  g_game->landscape.bottom_texture  = IMG_LoadTexture(g_game->renderer, "assets/images/bottom_block.png");
+  g_game->landscape.breakable_texture  = IMG_LoadTexture(g_game->renderer, "assets/images/block.png");
 
   /* creating on of each type, for test purposes */
   create_landscape_top_block(600, 150, 150);

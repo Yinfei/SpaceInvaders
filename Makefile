@@ -1,5 +1,5 @@
 CC  	= gcc
-SRC 	= $(wildcard *.c)
+SRC 	= $(shell find . -name '*.c')
 NAME	= SpaceInvaders
 OBJ   = $(SRC:.c=.o)
 RM		= rm -f
