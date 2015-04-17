@@ -6,218 +6,144 @@
 
 struct  s_game;
 struct  s_player;
-struct  s_bullet;
 struct  s_background;
-struct  s_enemy;
-struct  s_block;
+struct  s_element;
 struct  s_landscape;
 struct  s_enemies;
 
-typedef struct s_block {
-  /* block hitbox */
+typedef struct s_element {
   SDL_Rect              hitbox;
-  /* block hp (-1 if unbreakable) */
-  int                   hp;
-  /* block type (solid top, solid bottom, breakable) */
   int                   type;
-  /* previous block */
-  struct s_block*  prev;
-  /* next block */
-  struct s_block*  next;
-}t_block;
-
-typedef struct s_bullet {
-  /* bullet hitbox */
-  SDL_Rect              hitbox;
-  /* bullet direction x */
+  int                   parent;
+  int                   hp;
+  struct s_element*     prev;
+  struct s_element*     next;
   int                   x;
-  /* bullet direction x */
   int                   y;
-  /* previous bullet */
-  struct s_bullet* prev;
-  /* next bullet */
-  struct s_bullet* next;
-}t_bullet;
+  Uint32                cooldown;
+}t_element;
 
 typedef struct s_player {
-  /* player hitbox */
   SDL_Rect      hitbox;
-  /* player sprite */
   SDL_Texture*  texture;
-  /* movement speed */
   int           speed;
-  /* player hit points */
   int           hp;
-  /* list of player actions */
   void          (*action_list[200])();
-  /* active actions */
   int           active_actions[200];
-  /* time for next shot */
   Uint32        cooldown;
-  /* invulnerability period after taking period */
   Uint32        damage_cooldown;
-  /* pointer on first bullet of list list */
-  t_bullet*     bullet_list;
-  /* bullet texture (not in bullet struc because we only need one texture for all bullets) */
+  t_element*    bullet_list;
   SDL_Texture   *bullet_texture;
+  int           killed_by;
+  int           bullet_direction;
 }t_player;
 
-typedef struct s_enemy {
-  /* enemy hitbox */
-  SDL_Rect              hitbox;
-  /* enemy type : runner, jumper, flyer, mine, this will define his attack and movement paternes */
-  int                   type;
-  /* enemy life points */
-  int                   hp;
-  /* time for next shot */
-  Uint32                cooldown;
-  /* pointer on previous enemy */
-  struct s_enemy*  prev;
-  /* pointer on next enemy */
-  struct s_enemy*  next;
-}t_enemy;
-
-
 typedef struct s_enemies {
-  /* list of enemies */
-  t_enemy*     enemy_list;
-  /* mine texture */
-  SDL_Texture    *mine_texture;
-  /* runner texture */
-  SDL_Texture    *runner_texture;
-  /* jumper texture */
-  SDL_Texture    *jumper_texture;
-  /* flyer texture */
-  SDL_Texture    *flyer_texture;
-  /* enemies bullet list */
-  t_bullet*    bullet_list;
+  t_element*     enemy_list;
+  t_element*     bullet_list;
+  int            hp[10];
 }t_enemies;
 
 typedef struct s_background {
-  /* near */
   SDL_Rect       near;
-  /* near texture */
   SDL_Texture    *near_texture;
-  /* mid */
   SDL_Rect       mid;
-  /* mid texture */
   SDL_Texture    *mid_texture;
-  /* far */
   SDL_Rect       far;
-  /* far texture */
   SDL_Texture    *far_texture;
 }t_background;
 
 typedef struct s_landscape {
-  /* list of blocks */
-  t_block*     block;
-  /* breakable block texture */
+  t_element*     block_list;
   SDL_Texture    *breakable_texture;
-  /* solid block top texture */
   SDL_Texture    *top_texture;
-  /* solid block bottom texture */
   SDL_Texture    *bottom_texture;
 }t_landscape;
 
 typedef struct s_game {
-  /* main screen */
   SDL_Window*    window;
-  /* rendering tool */
   SDL_Renderer*  renderer;
-  /* variable used to quit game */
-  int            running;
-  /* player */
-  t_player     player;
-  /* player input event */
+  t_player*      player;
   SDL_Event      event;
-  /* duration of game */
   Uint32         timer;
-  /* duration of game */
   int            score;
-  /* parallax background */
   t_background   background;
-  /* landscape */
-  t_landscape landscape;
-  /* enemies */
-  t_enemies*   enemies;
+  t_landscape*   landscape;
+  t_enemies*     enemies;
+  SDL_Texture*   textures[30];
+  int            (*element_conditions[30])();
+  int            (*element_collisions[30])();
 }t_game;
 
 void         init_player();
-void         render_player();
+void         init_player_actions();
+void         init_active_player_actions();
 void         add_player_action();
 void         remove_player_action();
 void         move_player_left();
 void         move_player_right();
 void         move_player_up();
 void         move_player_down();
-void         init_player_actions();
 void         player_fire();
-void         init_active_player_actions();
 void         player_actions();
-int          init_game();
-int          init_background();
-void         end_game();
-void         clear_window();
-void         render_window();
-void         move_bullet(t_bullet*);
-void         render_player_bullet(t_bullet*);
-void         delete_player_bullet(t_bullet*);
-void         free_player_bullets();
-int          event_switcher();
-int          error();
+int          simulate_player_collision();
+void         render_player();
+void         free_player();
 void         init_enemies();
 void         create_enemy();
-void         render_enemy();
-void         delete_enemy();
-void         free_enemies();
-void         player_bullets();
-void         game_actions();
-void         background_actions();
-t_bullet*    get_next_bullet(t_bullet*);
-void         delete_enemy_bullet(t_bullet*);
-void         enemy_bullets();
 void         enemies_actions();
-void         landscape_actions();
-void         init_landscape();
-void         create_landscape_top_block(int, int, int);
-void         create_landscape_breakable_block(int, int, int, int);
-void         create_landscape_bottom_block(int, int, int);
-void         delete_landscape_block();
-void         free_landscape_blocks();
-void         move_lanscape_block();
-void         render_landscape_block();
-t_block*     get_next_block(t_block*);
-void         move_landscape_block();
-void         free_background();
-SDL_Texture* get_landscape_block_texture(int);
-void         free_landscape_textures();
-int          check_landscape_collisions(t_block*);
+int          init_game();
+void         init_textures();
+void         clear_window();
+void         render_window();
+int          event_switcher();
+void         game_actions();
+t_element*   next_element(t_element*);
 int          collision_manager(SDL_Rect*, SDL_Rect*);
 int          check_top_left_collision(SDL_Rect*, SDL_Rect*);
 int          check_top_right_collision(SDL_Rect*, SDL_Rect*);
 int          check_bottom_right_collision(SDL_Rect*, SDL_Rect*);
 int          check_bottom_left_collision(SDL_Rect*, SDL_Rect*);
-void         landscape_collisions();
-void         landscape_damage(t_block*);
-int          simulate_player_collision();
-void         manage_enemy_list();
-void         manage_enemy(t_enemy*);
-void         move_enemy(t_enemy*);
-t_enemy*     get_next_enemy(t_enemy*);
-int          check_enemy_collisions(t_enemy*);
-void         damage_enemy(t_enemy*);
-int          damage_player(int);
-void         free_player();
+void         init_element_conditions();
+void         init_element_collisions();
+void         add_element(t_element**, t_element*);
+void         remove_element(t_element**, t_element*);
+int          damage_element(t_element**, t_element*);
+void         free_element_list(t_element**);
+void         element_actions(t_element**);
+int          element_conditions(t_element*);
+int          element_collisions(t_element*);
+int          element_list_collision(t_element**, t_element*);
+void         move_element(t_element*);
+SDL_Texture* element_texture(t_element*);
+void         render_element(t_element*);
+int          is_animated(t_element*);
+SDL_Rect     crop_texture(t_element*, SDL_Rect);
+int          off_window_left(t_element*);
+int          off_window_right(t_element*);
+int          init_background();
+void         background_actions();
+void         free_background();
+void         init_landscape();
 void         free_landscape();
-void         free_enemy_list();
-void         check_enemy_fire(t_enemy*);
-void         custom_enemy_movement(t_enemy*);
-void         enemy_fire();
-void         move_bullet(t_bullet*);
-void         render_enemy_bullet(t_bullet*);
-void         enemy_bullet_direction(t_bullet*);
+int          landscape_collision(t_element*);
+int          damage_player(int, t_element*);
+void         free_enemies();
+void         free_game();
+int          game_state();
+void         create_block(int, int, int);
+void         extra_actions(t_element*);
+void         enemy_fire(t_element*);
+void         enemy_bullet_direction(t_element*);
+int          enemy_collision(t_element*);
+void         enemy_movement(t_element*);
 void         player_collisions();
-void         enemies_collisions();
+void         init_enemies_hp(t_enemies*);
+int          player_bullet_direction();
+void         set_bullet_direction_up();
+void         set_bullet_direction_down();
+void         reset_bullet_direction();
+int          error();
 
 t_game* g_game;
 
