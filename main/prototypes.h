@@ -143,11 +143,11 @@ int          player_bullet_direction();
 void         set_bullet_direction_up();
 void         set_bullet_direction_down();
 void         reset_bullet_direction();
+int          enemy_hp(int);
 int          error();
 
-t_game* g_game;
-
-int g_window_height;
-int g_window_width;
+t_game*      g_game;
+int          g_window_height;
+int          g_window_width;
 
 #endif /*!SPACE_H_*/
