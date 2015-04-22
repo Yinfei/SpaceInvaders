@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 void enemies_actions() {
   element_actions(&g_game->enemies->enemy_list);

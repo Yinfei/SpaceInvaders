@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 SDL_Texture* element_texture(t_element* element) {
   return g_game->textures[element->type];

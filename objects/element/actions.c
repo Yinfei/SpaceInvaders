@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 t_element* next_element(t_element* element) {
   return element->next;
