@@ -12,6 +12,11 @@ int init_game() {
   g_game->score = 0;
   g_game->timer = SDL_GetTicks();
   init_audio();
+  init_menu();
+  return 0;
+}
+
+int init_game_elements() {
   init_score();
   init_element_conditions();
   init_element_collisions();
@@ -52,6 +57,4 @@ void free_game() {
   free_background();
   free_audio();
   free_score();
-  SDL_DestroyWindow(g_game->window);
-  SDL_Quit();
 }

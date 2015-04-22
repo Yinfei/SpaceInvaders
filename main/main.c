@@ -1,12 +1,7 @@
 #include "prototypes.h"
 
-int main ()
-{
-  t_game new_game;
-
-  g_game = &new_game;
-  if (init_game() < 0)
-    return error();
+void launch_game() {
+  init_game_elements();
 
   while (1)
   {
@@ -22,5 +17,23 @@ int main ()
       SDL_Delay(2);
   }
   free_game();
+}
+
+
+int main ()
+{
+  t_game new_game;
+
+  g_game = &new_game;
+  if (init_game() < 0)
+    return error();
+
+  if (launch_menu() != -1)
+    launch_game();
+
+
+  free_menu();
+  SDL_DestroyWindow(g_game->window);
+  SDL_Quit();
   return EXIT_SUCCESS;
 }

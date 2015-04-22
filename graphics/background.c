@@ -22,6 +22,12 @@ int init_background() {
   return 0;
 }
 
+void render_background() {
+  SDL_RenderCopy(g_game->renderer, g_game->background.far_texture, NULL, &g_game->background.far);
+  SDL_RenderCopy(g_game->renderer, g_game->background.mid_texture, NULL, &g_game->background.mid);
+  SDL_RenderCopy(g_game->renderer, g_game->background.near_texture, NULL, &g_game->background.near);
+}
+
 void background_actions() {
   if (g_game->background.near.x <= -1280)
     g_game->background.near.x = 0;

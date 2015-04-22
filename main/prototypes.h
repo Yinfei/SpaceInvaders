@@ -72,13 +72,20 @@ typedef struct s_jukebox {
 
 typedef struct s_writer {
   TTF_Font*   font;
-  SDL_Color*  color;
+  SDL_Color   color;
   SDL_Rect    scorebox;
 }t_writer;
+
+typedef struct s_menu {
+  SDL_Texture*  textures[6];
+  SDL_Rect      buttons[6];
+  int           selected;
+}t_menu;
 
 typedef struct s_game {
   SDL_Window*    window;
   SDL_Renderer*  renderer;
+  t_menu*        menu;
   t_player*      player;
   SDL_Event      event;
   Uint32         timer;
@@ -175,6 +182,17 @@ void         init_enemies_points(t_enemies*);
 int          init_score();
 void         free_score();
 void         render_score();
+int          init_game_elements();
+void         launch_game();
+int          menu_event_switcher();
+int          init_menu();
+void         create_menu_button(int);
+void         init_menu_textures();
+void         free_menu_textures();
+void         free_menu();
+void         render_background();
+void         render_menu();
+int          launch_menu();
 
 t_game*      g_game;
 int          g_window_height;
