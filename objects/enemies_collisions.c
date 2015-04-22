@@ -13,6 +13,19 @@ int enemy_hp(int type) {
   return g_game->enemies->hp[type];
 }
 
+void init_enemies_points(t_enemies* enemies) {
+  int i;
+
+  for (i = 0; i < 10; i++)
+    enemies->points[i] = 0;
+
+  enemies->points[0] = 7;
+}
+
+int enemy_points(int type) {
+  return g_game->enemies->points[type];
+}
+
 int enemy_collision(t_element* enemy) {
   int collision;
 

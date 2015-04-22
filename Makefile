@@ -4,7 +4,7 @@ NAME	= SpaceInvaders
 OBJ   = $(SRC:.c=.o)
 RM		= rm -f
 CFLAGS	=	-ansi -pedantic -W -Wall -Werror `sdl2-config --cflags`
-LDFLAGS	=	`sdl2-config --libs` -lSDL2_image
+LDFLAGS	=	`sdl2-config --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 
 $(NAME) : $(OBJ)
 	  gcc $(CFLAGS) $(SRC) -o SpaceInvaders $(LDFLAGS)

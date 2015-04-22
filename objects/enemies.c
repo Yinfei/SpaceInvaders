@@ -7,6 +7,7 @@ void init_enemies() {
   g_game->enemies = enemies;
   enemies->enemy_list = NULL;
   init_enemies_hp(enemies);
+  init_enemies_points(enemies);
 
   /* creating enemy for test purposes */
   create_enemy(900, 120, 0, 3);
@@ -30,6 +31,7 @@ void create_enemy(int x, int y, int type) {
   enemy->cooldown = 0;
   enemy->type = type;
   enemy->parent = type;
+  enemy->points = enemy_points(type);
   enemy->x = -1;
   enemy->y = 0;
   add_element(&g_game->enemies->enemy_list, enemy);

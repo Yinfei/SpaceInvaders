@@ -49,9 +49,9 @@ int damage_element(t_element** list, t_element* element) {
   {
     remove_element(list, element);
     critical = 1;
+    g_game->score += element->points;
   }
-  /* add game score */
-  g_game->score += 10;
+
   return critical;
 }
 

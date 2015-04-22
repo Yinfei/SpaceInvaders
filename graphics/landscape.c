@@ -41,7 +41,10 @@ void create_block(int x, int y, int type) {
   if (type != 12)
     block->hp = -1;
   else
+  {
     block->hp = 3;
+    block->points = 5;
+  }
   block->x = -1;
   block->y = 0;
   add_element(&g_game->landscape->block_list, block);
