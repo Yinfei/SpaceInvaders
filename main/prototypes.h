@@ -2,7 +2,10 @@
 # define SPACE_H_
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2_Mixer/SDL_Mixer.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 struct  s_game;
 struct  s_player;
@@ -21,6 +24,7 @@ typedef struct s_element {
   int                   x;
   int                   y;
   Uint32                cooldown;
+  int                   points;
 }t_element;
 
 typedef struct s_player {
@@ -42,6 +46,7 @@ typedef struct s_enemies {
   t_element*     enemy_list;
   t_element*     bullet_list;
   int            hp[10];
+  int            points[10];
 }t_enemies;
 
 typedef struct s_background {
@@ -60,6 +65,17 @@ typedef struct s_landscape {
   SDL_Texture    *bottom_texture;
 }t_landscape;
 
+typedef struct s_jukebox {
+  Mix_Music*     music[3];
+  Mix_Chunk*     soundboard[10];
+}t_jukebox;
+
+typedef struct s_writer {
+  TTF_Font*   font;
+  SDL_Color*  color;
+  SDL_Rect    scorebox;
+}t_writer;
+
 typedef struct s_game {
   SDL_Window*    window;
   SDL_Renderer*  renderer;
@@ -67,12 +83,14 @@ typedef struct s_game {
   SDL_Event      event;
   Uint32         timer;
   int            score;
+  t_writer*      writer;
   t_background   background;
   t_landscape*   landscape;
   t_enemies*     enemies;
   SDL_Texture*   textures[30];
   int            (*element_conditions[30])();
   int            (*element_collisions[30])();
+  t_jukebox      jukebox;
 }t_game;
 
 void         init_player();
@@ -145,6 +163,18 @@ void         set_bullet_direction_down();
 void         reset_bullet_direction();
 int          enemy_hp(int);
 int          error();
+int          init_audio();
+void         init_music();
+void         init_soundboard();
+void         free_audio();
+int          init_score();
+void         free_score();
+void         render_score();
+int          enemy_points(int);
+void         init_enemies_points(t_enemies*);
+int          init_score();
+void         free_score();
+void         render_score();
 
 t_game*      g_game;
 int          g_window_height;
