@@ -72,25 +72,35 @@ typedef struct s_jukebox {
 
 typedef struct s_writer {
   TTF_Font*   font;
-  SDL_Color*  color;
+  SDL_Color   color;
   SDL_Rect    scorebox;
 }t_writer;
 
+typedef struct s_choice_screen {
+  int           (*launcher[6])();
+  SDL_Texture*  textures[6];
+  SDL_Rect      buttons[6];
+  int           selected;
+}t_choice_screen;
+
 typedef struct s_game {
-  SDL_Window*    window;
-  SDL_Renderer*  renderer;
-  t_player*      player;
-  SDL_Event      event;
-  Uint32         timer;
-  int            score;
-  t_writer*      writer;
-  t_background   background;
-  t_landscape*   landscape;
-  t_enemies*     enemies;
-  SDL_Texture*   textures[30];
-  int            (*element_conditions[30])();
-  int            (*element_collisions[30])();
-  t_jukebox      jukebox;
+  SDL_Window*       window;
+  SDL_Renderer*     renderer;
+  t_choice_screen*  menu;
+  t_choice_screen*  gameover;
+  t_choice_screen*  congratulations;
+  t_player*         player;
+  SDL_Event         event;
+  Uint32            timer;
+  int               score;
+  t_writer*         writer;
+  t_background      background;
+  t_landscape*      landscape;
+  t_enemies*        enemies;
+  SDL_Texture*      textures[30];
+  int               (*element_conditions[30])();
+  int               (*element_collisions[30])();
+  t_jukebox         jukebox;
 }t_game;
 
 void         init_player();
@@ -175,6 +185,20 @@ void         init_enemies_points(t_enemies*);
 int          init_score();
 void         free_score();
 void         render_score();
+int          init_game_elements();
+int          launch_game();
+int          menu_event_switcher();
+int          init_menu();
+void         create_menu_button(int);
+void         init_menu_textures();
+void         free_menu_textures();
+void         free_menu();
+void         render_background();
+void         render_choice_screen();
+int          launch_menu();
+int          exit_game();
+int          highscores();
+int          launcher_loop();
 
 t_game*      g_game;
 int          g_window_height;

@@ -8,19 +8,9 @@ int main ()
   if (init_game() < 0)
     return error();
 
-  while (1)
-  {
-    if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->timer) == 1)
-    {
-      g_game->timer = SDL_GetTicks() + 16;
-      if (event_switcher() != -1)
-        render_window();
-      else
-        break;
-    }
-    else
-      SDL_Delay(2);
-  }
-  free_game();
+  launcher_loop();
+  free_menu();
+  SDL_DestroyWindow(g_game->window);
+  SDL_Quit();
   return EXIT_SUCCESS;
 }

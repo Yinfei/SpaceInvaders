@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 int simulate_player_collision() {
   t_element* current;

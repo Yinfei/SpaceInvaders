@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 void move_player_left() {
   g_game->player->hitbox.x -= g_game->player->speed;

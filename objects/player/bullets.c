@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 int player_bullet_direction() {
   return g_game->player->bullet_direction;
