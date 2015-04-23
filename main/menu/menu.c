@@ -27,12 +27,12 @@ void init_menu_textures() {
 
   for (i = 0; i < 6; i++)
     g_game->menu->textures[i] = NULL;
-  g_game->menu->textures[0] = IMG_LoadTexture(g_game->renderer, "assets/images/mid.png");
-  g_game->menu->textures[1] = IMG_LoadTexture(g_game->renderer, "assets/images/mid.png");
-  g_game->menu->textures[2] = IMG_LoadTexture(g_game->renderer, "assets/images/mid.png");
-  g_game->menu->textures[3] = IMG_LoadTexture(g_game->renderer, "assets/images/far.png");
-  g_game->menu->textures[4] = IMG_LoadTexture(g_game->renderer, "assets/images/far.png");
-  g_game->menu->textures[5] = IMG_LoadTexture(g_game->renderer, "assets/images/far.png");
+  g_game->menu->textures[0] = IMG_LoadTexture(g_game->renderer, "assets/images/play_selected.png");
+  g_game->menu->textures[1] = IMG_LoadTexture(g_game->renderer, "assets/images/highscores_selected.png");
+  g_game->menu->textures[2] = IMG_LoadTexture(g_game->renderer, "assets/images/exit_selected.png");
+  g_game->menu->textures[3] = IMG_LoadTexture(g_game->renderer, "assets/images/play.png");
+  g_game->menu->textures[4] = IMG_LoadTexture(g_game->renderer, "assets/images/highscores.png");
+  g_game->menu->textures[5] = IMG_LoadTexture(g_game->renderer, "assets/images/exit.png");
 }
 
 void free_menu_textures() {
