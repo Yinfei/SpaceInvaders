@@ -5,7 +5,10 @@ int menu_event_switcher() {
   while (SDL_PollEvent(&g_game->event))
   {
     if (g_game->event.type == SDL_QUIT)
+    {
+      g_game->running = 0;
       return -1;
+    }
     else if (g_game->event.type == SDL_KEYDOWN)
     {
       if (g_game->event.key.keysym.sym == 32)
@@ -30,7 +33,10 @@ int event_switcher() {
   while (SDL_PollEvent(&g_game->event))
   {
     if (g_game->event.type == SDL_QUIT)
+    {
+      g_game->running = 0;
       return -1;
+    }
     else if (g_game->event.type == SDL_KEYDOWN)
       add_player_action();
     else if (g_game->event.type == SDL_KEYUP)

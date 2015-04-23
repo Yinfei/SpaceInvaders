@@ -14,6 +14,7 @@ void init_player() {
   player->cooldown = 0;
   player->damage_cooldown = 0;
   player->killed_by = -1;
+  player->won = 0;
   player->bullet_direction = 0;
   player->texture = IMG_LoadTexture(g_game->renderer, "assets/images/dubstepcat.png");
   init_player_actions();
