@@ -1,4 +1,4 @@
-#include "prototypes.h"
+#include "../prototypes.h"
 
 int init_game() {
   g_window_height = 420;
@@ -28,25 +28,6 @@ int init_game_elements() {
   return 0;
 }
 
-int game_state() {
-  int state;
-
-  state = 0;
-  if (g_game->player->hitbox.x + g_game->player->hitbox.w <= 0)
-    state++;
-  else if (g_game->player->hp <= 0)
-    state++;
-  return state;
-}
-
-void game_actions() {
-  background_actions();
-  element_actions(&g_game->landscape->block_list);
-  render_score();
-  /* manage powerups appearing ? manage powerups moving forwards ... */
-  /* changing music ? (for boss ...) */
-}
-
 void free_game() {
   if (g_game->player->killed_by != -1)
     printf("killed by %d\n", g_game->player->killed_by);
@@ -55,6 +36,5 @@ void free_game() {
   free_landscape();
   free_enemies();
   free_background();
-  free_audio();
   free_score();
 }

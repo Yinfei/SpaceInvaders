@@ -1,6 +1,7 @@
 #include "prototypes.h"
 
 int menu_event_switcher() {
+  clear_window();
   while (SDL_PollEvent(&g_game->event))
   {
     if (g_game->event.type == SDL_QUIT)
@@ -9,15 +10,13 @@ int menu_event_switcher() {
     {
       if (g_game->event.key.keysym.sym == 32)
         return 0;
-      else if (g_game->event.key.keysym.sym == SDLK_UP && g_game->menu->selected < 5)
-        g_game->menu->selected += 1;
-      else if (g_game->event.key.keysym.sym == SDLK_DOWN && g_game->menu->selected > 3)
+      else if (g_game->event.key.keysym.sym == SDLK_UP && g_game->menu->selected > 3)
         g_game->menu->selected -= 1;
+      else if (g_game->event.key.keysym.sym == SDLK_DOWN && g_game->menu->selected < 5)
+        g_game->menu->selected += 1;
     }
-
   }
-
-  render_menu();
+  render_choice_screen(g_game->menu);
   return 1;
 }
 
