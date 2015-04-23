@@ -1,6 +1,6 @@
 #include "prototypes.h"
 
 int exit_game() {
-  printf("exit game !\n");
+  printf("Thank you for playing, see you soon !\n");
   return 0;
 }
