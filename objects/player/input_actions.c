@@ -52,6 +52,6 @@ void player_fire() {
     bullet->prev = NULL;
     bullet->type = 20;
     add_element(&g_game->player->bullet_list, bullet);
-    Mix_PlayChannel(1, g_game->jukebox.soundboard[0], 1);
+    Mix_PlayChannel(1, g_game->jukebox.soundboard[0], 0);
   }
 }

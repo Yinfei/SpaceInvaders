@@ -208,6 +208,7 @@ void         render_gameover();
 void         render_gameover_text();
 int          loop_gameover();
 void         render_killer();
+void         render_gameover_background();
 
 
 t_game*      g_game;

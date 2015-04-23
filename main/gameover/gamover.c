@@ -37,6 +37,19 @@ void render_gameover_text() {
   TTF_CloseFont(writer.font);
 }
 
+void render_gameover_background() {
+  SDL_Texture* texture;
+  SDL_Rect rec;
+
+  rec.x = 0;
+  rec.y = 0;
+  rec.w = g_window_width;
+  rec.h = g_window_height;
+  texture = IMG_LoadTexture(g_game->renderer, "assets/images/black.png");
+  SDL_RenderCopy(g_game->renderer, texture, NULL, &rec);
+  SDL_DestroyTexture(texture);
+}
+
 void render_killer() {
   SDL_Rect rec;
 
@@ -51,8 +64,7 @@ void render_killer() {
 }
 
 void render_gameover() {
-  /* render half black screen */
-
+  render_gameover_background();
   render_gameover_text();
   render_killer();
   render_window();
