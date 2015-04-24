@@ -39,12 +39,14 @@ typedef struct s_player {
   t_element*    bullet_list;
   SDL_Texture   *bullet_texture;
   int           killed_by;
+  int           won;
   int           bullet_direction;
 }t_player;
 
 typedef struct s_enemies {
   t_element*     enemy_list;
   t_element*     bullet_list;
+  char*          names[10];
   int            hp[10];
   int            points[10];
 }t_enemies;
@@ -73,7 +75,7 @@ typedef struct s_jukebox {
 typedef struct s_writer {
   TTF_Font*   font;
   SDL_Color   color;
-  SDL_Rect    scorebox;
+  SDL_Rect    box;
 }t_writer;
 
 typedef struct s_choice_screen {
@@ -93,6 +95,7 @@ typedef struct s_game {
   SDL_Event         event;
   Uint32            timer;
   int               score;
+  int               running;
   t_writer*         writer;
   t_background      background;
   t_landscape*      landscape;
@@ -199,6 +202,14 @@ int          launch_menu();
 int          exit_game();
 int          highscores();
 int          launcher_loop();
+char*        enemy_name(int);
+void         init_enemies_names();
+void         render_gameover();
+void         render_gameover_text();
+int          loop_gameover();
+void         render_killer();
+void         render_gameover_background();
+
 
 t_game*      g_game;
 int          g_window_height;

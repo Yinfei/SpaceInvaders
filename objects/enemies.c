@@ -8,6 +8,7 @@ void init_enemies() {
   enemies->enemy_list = NULL;
   init_enemies_hp(enemies);
   init_enemies_points(enemies);
+  init_enemies_names();
 
   /* creating enemy for test purposes */
   create_enemy(900, 120, 0, 3);
@@ -16,6 +17,10 @@ void init_enemies() {
   create_enemy(1050, 200, 0, 3);
 
   enemies->bullet_list = NULL;
+}
+
+void init_enemies_names() {
+  g_game->enemies->names[0] = "fatty";
 }
 
 void create_enemy(int x, int y, int type) {

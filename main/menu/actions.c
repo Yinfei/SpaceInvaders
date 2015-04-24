@@ -1,6 +1,8 @@
 #include "../prototypes.h"
 
 int launcher_loop() {
+  if (g_game->running == 0)
+    return -1;
   if (launch_menu() > -1)
   {
     if (g_game->menu->launcher[g_game->menu->selected - 3]() != 0)
