@@ -5,11 +5,6 @@ void enemies_actions() {
   element_actions(&g_game->enemies->bullet_list);
 }
 
-void enemy_movement(t_element* enemy) {
-  /* change this to some sort of custom movement (oscilation, rotation, linear) */
-  enemy->hitbox.y = enemy->hitbox.y;
-}
-
 void enemy_bullet_direction(t_element* bullet) {
   int x;
   int y;
