@@ -53,6 +53,7 @@ typedef struct s_enemies {
   int            hp[10];
   int            points[10];
   void           (*movements[10])();
+  void           (*fire[10])();
 }t_enemies;
 
 typedef struct s_background {
@@ -217,6 +218,8 @@ void         init_enemies_movements();
 void         enemy_mouvement_vertical();
 void         enemy_mouvement_none();
 void         enemy_movement_rotate();
+void         init_enemy_fire();
+void         enemy_default_fire(t_element*);
 
 t_game*      g_game;
 int          g_window_height;

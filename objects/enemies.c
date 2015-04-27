@@ -10,6 +10,7 @@ void init_enemies() {
   init_enemies_points(enemies);
   init_enemies_names();
   init_enemies_movements();
+  init_enemy_fire();
 
   /* creating enemy for test purposes */
   create_enemy(900, 120, 0, 3);
