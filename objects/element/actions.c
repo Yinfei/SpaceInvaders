@@ -59,7 +59,8 @@ void extra_actions(t_element* element) {
   if (element->type >= 0 && element->type < 10)
   {
     enemy_movement(element);
-    if (element->hitbox.x > 0 && element->hitbox.x < g_window_width)
+    if (element->hitbox.x > 0 && element->hitbox.x < g_window_width
+      && element->type != 2)
       enemy_fire(element);
   }
 }

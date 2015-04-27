@@ -7,6 +7,8 @@ void init_enemies_hp(t_enemies* enemies) {
     enemies->hp[i] = 0;
 
   enemies->hp[0] = 3;
+  enemies->hp[1] = 2;
+  enemies->hp[2] = 1;
 }
 
 int enemy_hp(int type) {
@@ -20,6 +22,8 @@ void init_enemies_points(t_enemies* enemies) {
     enemies->points[i] = 0;
 
   enemies->points[0] = 7;
+  enemies->points[1] = 3;
+  enemies->points[2] = 1;
 }
 
 int enemy_points(int type) {

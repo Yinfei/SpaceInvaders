@@ -33,6 +33,8 @@ void init_enemies_movements() {
 
 void init_enemies_names() {
   g_game->enemies->names[0] = "fatty";
+  g_game->enemies->names[1] = "bobby";
+  g_game->enemies->names[2] = "mine";
 }
 
 void create_enemy(int x, int y, int type) {

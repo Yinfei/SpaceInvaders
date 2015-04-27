@@ -169,7 +169,7 @@ int          game_state();
 void         create_block(int, int, int);
 void         extra_actions(t_element*);
 void         enemy_fire(t_element*);
-void         enemy_bullet_direction(t_element*);
+void         enemy_bullet_direction(t_element*, t_element*);
 int          enemy_collision(t_element*);
 void         enemy_movement(t_element*);
 void         player_collisions();
