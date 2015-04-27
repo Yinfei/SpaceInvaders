@@ -5,12 +5,7 @@ void enemies_actions() {
   element_actions(&g_game->enemies->bullet_list);
 }
 
-void enemy_movement(t_element* enemy) {
-  /* change this to some sort of custom movement (oscilation, rotation, linear) */
-  enemy->hitbox.y = enemy->hitbox.y;
-}
-
-void enemy_bullet_direction(t_element* bullet) {
+void enemy_bullet_direction(t_element* enemy, t_element* bullet) {
   int x;
   int y;
   int angle;
@@ -27,7 +22,10 @@ void enemy_bullet_direction(t_element* bullet) {
     angle = y;
 
   bullet->x = -3;
-  bullet->y = angle;
+  if (enemy->type == 1)
+    bullet->y = angle;
+  else
+    bullet->y = 0;
 }
 
 void enemy_fire(t_element* enemy) {
@@ -46,7 +44,7 @@ void enemy_fire(t_element* enemy) {
       bullet->hitbox.h = 10;
       bullet->type = 21;
       bullet->parent = enemy->type;
-      enemy_bullet_direction(bullet);
+      enemy_bullet_direction(enemy, bullet);
       add_element(&g_game->enemies->bullet_list, bullet);
       enemy->cooldown = SDL_GetTicks() + 700;
     }

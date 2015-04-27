@@ -7,6 +7,8 @@ void init_textures() {
     g_game->textures[i] = NULL;
 
   g_game->textures[0]  = IMG_LoadTexture(g_game->renderer, "assets/images/fatcat.png");
+  g_game->textures[1]  = IMG_LoadTexture(g_game->renderer, "assets/images/enemy1.png");
+  g_game->textures[2]  = IMG_LoadTexture(g_game->renderer, "assets/images/bomb.png");
   g_game->textures[10] = IMG_LoadTexture(g_game->renderer, "assets/images/solid_block.png");
   g_game->textures[11] = IMG_LoadTexture(g_game->renderer, "assets/images/solid_block2.png");
   g_game->textures[12] = IMG_LoadTexture(g_game->renderer, "assets/images/block.png");

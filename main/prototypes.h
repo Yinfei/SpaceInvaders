@@ -23,8 +23,11 @@ typedef struct s_element {
   struct s_element*     next;
   int                   x;
   int                   y;
+  int                   init_x;
+  int                   init_y;
   Uint32                cooldown;
   int                   points;
+  float                 timeline;
 }t_element;
 
 typedef struct s_player {
@@ -49,6 +52,7 @@ typedef struct s_enemies {
   char*          names[10];
   int            hp[10];
   int            points[10];
+  void           (*movements[10])();
 }t_enemies;
 
 typedef struct s_background {
@@ -165,7 +169,7 @@ int          game_state();
 void         create_block(int, int, int);
 void         extra_actions(t_element*);
 void         enemy_fire(t_element*);
-void         enemy_bullet_direction(t_element*);
+void         enemy_bullet_direction(t_element*, t_element*);
 int          enemy_collision(t_element*);
 void         enemy_movement(t_element*);
 void         player_collisions();
@@ -209,7 +213,10 @@ void         render_gameover_text();
 int          loop_gameover();
 void         render_killer();
 void         render_gameover_background();
-
+void         init_enemies_movements();
+void         enemy_mouvement_vertical();
+void         enemy_mouvement_none();
+void         enemy_movement_rotate();
 
 t_game*      g_game;
 int          g_window_height;
