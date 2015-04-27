@@ -13,8 +13,8 @@ void init_enemies() {
 
   /* creating enemy for test purposes */
   create_enemy(900, 120, 0, 3);
-  create_enemy(920, 300, 0, 2);
-  create_enemy(1000, 240, 0, 1);
+  create_enemy(920, 330, 1, 2);
+  create_enemy(1000, 240, 2, 1);
   create_enemy(1050, 200, 0, 3);
 
   enemies->bullet_list = NULL;
