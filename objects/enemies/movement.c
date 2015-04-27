@@ -10,6 +10,8 @@ void enemy_mouvement_none(t_element* enemy) {
 }
 
 void enemy_movement_rotate(t_element* enemy) {
+  enemy->hitbox.y = sin(enemy->timeline)*40 + enemy->init_y;
+  enemy->hitbox.x = cos(enemy->timeline) + enemy->hitbox.x;
   enemy->timeline += 0.1;
 }
 
