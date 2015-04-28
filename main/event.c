@@ -45,6 +45,7 @@ int event_switcher() {
   player_actions();
   enemies_actions();
   game_actions();
+  render_player_hp();
   return 0;
 }
 

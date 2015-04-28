@@ -30,11 +30,17 @@ typedef struct s_element {
   float                 timeline;
 }t_element;
 
+typedef struct s_lifebox {
+  SDL_Rect      box;
+  SDL_Texture*  texture;
+}t_lifebox;
+
 typedef struct s_player {
   SDL_Rect      hitbox;
   SDL_Texture*  texture;
   int           speed;
   int           hp;
+  t_lifebox*    lifebox;
   void          (*action_list[200])();
   int           active_actions[200];
   Uint32        cooldown;
@@ -220,6 +226,8 @@ void         enemy_mouvement_none();
 void         enemy_movement_rotate();
 void         init_enemy_fire();
 void         enemy_default_fire(t_element*);
+void         init_player_lifebox();
+void         render_player_hp();
 
 t_game*      g_game;
 int          g_window_height;
