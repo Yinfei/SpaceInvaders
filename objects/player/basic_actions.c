@@ -24,4 +24,15 @@ int damage_player(int i, t_element* element) {
     return 0;
 }
 
+void render_player_hp() {
+  SDL_Rect rec;
+
+  rec.x = 0;
+  rec.y = 0;
+  rec.w = 300 * g_game->player->hp;
+  rec.h = 300;
+  g_game->player->lifebox->box.w = 30 * g_game->player->hp;
+  SDL_RenderCopy(g_game->renderer, g_game->player->lifebox->texture, &rec, &g_game->player->lifebox->box);
+}
+
 /* to come : power up ... */
