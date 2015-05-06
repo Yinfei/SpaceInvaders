@@ -103,13 +103,13 @@ typedef struct s_choice_screen {
 }t_choice_screen;
 
 typedef struct s_score {
-  char* name;
+  char  name[80];
   int   score;
 }t_score;
 
 typedef struct s_highscores {
   /* score list */
-  t_score* score;
+  t_score* score[3];
   /* writer */
   t_writer* writer;
 }t_highscores;
