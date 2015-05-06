@@ -13,6 +13,7 @@ int init_game() {
   g_game->timer = SDL_GetTicks();
   init_audio();
   init_menu();
+  TTF_Init();
   return 0;
 }
 
@@ -37,4 +38,5 @@ void free_game() {
   free_enemies();
   free_background();
   free_score();
+  TTF_Quit();
 }

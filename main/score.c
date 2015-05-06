@@ -5,7 +5,6 @@ int init_score(){
   SDL_Color color = {12,36,125,255};
 
   g_game->score = 0;
-  TTF_Init();
   writer = malloc(sizeof(t_writer));
   writer->font = TTF_OpenFont("assets/fonts/roboto.ttf", 30);
   writer->box.w = 60;
@@ -20,7 +19,6 @@ int init_score(){
 void free_score(){
   TTF_CloseFont(g_game->writer->font);
   free(g_game->writer);
-  TTF_Quit();
 }
 
 void render_score(){
