@@ -1,12 +1,5 @@
 #include "../prototypes.h"
 
-void init_highscores_list() {
-  int i;
-
-  for (i = 0; i < 3; i++)
-    add_highscore("CAT", 10 * i, i);
-}
-
 int init_highscores() {
   t_highscores* highscores;
   SDL_Color color = {12,136,125,255};
@@ -20,47 +13,30 @@ int init_highscores() {
   highscores->writer->box.y = 100;
   highscores->writer->color = color;
   g_game->highscores = highscores;
+
   init_highscores_list();
   return 1;
 }
 
-int loop_highscores() {
-  while(1)
+int init_highscores_list() {
+  FILE* file;
+  char str[40];
+  int i;
+
+  i = 0;
+  file = fopen("assets/datas/highscores.csv", "r+");
+  if (file == NULL)
   {
-    while (SDL_PollEvent(&g_game->event))
-    {
-      if (g_game->event.type == SDL_QUIT)
-      {
-        g_game->running = 0;
-        return -1;
-      }
-      else if (g_game->event.type == SDL_KEYDOWN)
-        if (g_game->event.key.keysym.sym == 32)
-          return 0;
-    }
+    printf("did not open\n");
+    return -1;
   }
-}
-
-int highscores() {
-  init_highscores();
-  render_highscores();
-  loop_highscores();
-  free_highscores();
-
-  return 1;
-}
-
-int is_highscore() {
-  return 1;
-}
-
-void add_highscore(char* name, int i, int index) {
-  t_score* scorebox;
-
-  scorebox = malloc(sizeof(t_score));
-  strcpy(scorebox->name, name);
-  scorebox->score = i;
-  g_game->highscores->score[index] = scorebox;
+  while (fgets(str, 40, file) != NULL && i < 3)
+  {
+    decode_highscore_format(str, i);
+    i++;
+  }
+  fclose(file);
+  return 0;
 }
 
 void render_highscores() {
@@ -71,7 +47,6 @@ void render_highscores() {
   int i;
 
   clear_window();
-
   for (i = 0; i < 3; i++)
   {
     strcpy(str, "");
@@ -92,7 +67,8 @@ void free_highscores() {
   TTF_CloseFont(g_game->highscores->writer->font);
   free(g_game->highscores->writer);
 
-  /* write score csv */
+  add_player_highscore();
+  export_highscore_file();
 
   for (i = 0; i < 3; i++)
     free(g_game->highscores->score[i]);

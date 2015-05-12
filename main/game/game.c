@@ -14,6 +14,7 @@ int init_game() {
   init_audio();
   init_menu();
   TTF_Init();
+  init_highscores();
   return 0;
 }
 
@@ -38,5 +39,4 @@ void free_game() {
   free_enemies();
   free_background();
   free_score();
-  TTF_Quit();
 }
