@@ -28,8 +28,8 @@ void init_player_lifebox() {
   t_lifebox* lifebox;
 
   lifebox = malloc(sizeof(t_lifebox));
-  lifebox->box.x = 0;
-  lifebox->box.y = 0;
+  lifebox->box.x = 10;
+  lifebox->box.y = 10;
   lifebox->box.w = 90;
   lifebox->box.h = 30;
   lifebox->texture = IMG_LoadTexture(g_game->renderer, "assets/images/lives.png");
