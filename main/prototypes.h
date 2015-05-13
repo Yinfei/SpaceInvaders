@@ -108,9 +108,7 @@ typedef struct s_score {
 }t_score;
 
 typedef struct s_highscores {
-  /* score list */
-  t_score* score[3];
-  /* writer */
+  t_score*  score[3];
   t_writer* writer;
 }t_highscores;
 
@@ -257,6 +255,10 @@ void         decode_highscore_format(char*, int);
 void         input_player_name(char*);
 void         add_player_highscore();
 void         export_highscore_file();
+int          highscore_event_switcher();
+void         render_name_input_screen(int*, char*);
+void         switch_selected_char(int*);
+void         edit_selected_char(int*, char*);
 
 t_game*      g_game;
 int          g_window_height;

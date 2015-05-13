@@ -60,10 +60,3 @@ void export_highscore_file() {
   }
   fclose(file);
 }
-
-
-
-
-
-
-

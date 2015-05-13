@@ -6,14 +6,13 @@ int init_highscores() {
 
   highscores = malloc(sizeof(t_highscores));
   highscores->writer = malloc(sizeof(t_writer));
-  highscores->writer->font = TTF_OpenFont("assets/fonts/roboto.ttf", 50);
+  highscores->writer->font = TTF_OpenFont("assets/fonts/lekton.ttf", 50);
   highscores->writer->box.w = 150;
   highscores->writer->box.h = 30;
   highscores->writer->box.x = g_window_width / 2 - highscores->writer->box.w / 2;
   highscores->writer->box.y = 100;
   highscores->writer->color = color;
   g_game->highscores = highscores;
-
   init_highscores_list();
   return 1;
 }
@@ -46,6 +45,10 @@ void render_highscores() {
   char tmp[80];
   int i;
 
+  g_game->highscores->writer->box.w = 150;
+  g_game->highscores->writer->box.h = 30;
+  g_game->highscores->writer->box.x = g_window_width / 2 - g_game->highscores->writer->box.w / 2;
+  g_game->highscores->writer->box.y = 100;
   clear_window();
   for (i = 0; i < 3; i++)
   {
@@ -64,12 +67,10 @@ void render_highscores() {
 
 void free_highscores() {
   int i;
+
+  export_highscore_file();
   TTF_CloseFont(g_game->highscores->writer->font);
   free(g_game->highscores->writer);
-
-  add_player_highscore();
-  export_highscore_file();
-
   for (i = 0; i < 3; i++)
     free(g_game->highscores->score[i]);
   free(g_game->highscores);
