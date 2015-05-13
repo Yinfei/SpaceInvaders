@@ -259,6 +259,8 @@ int          highscore_event_switcher();
 void         render_name_input_screen(int*, char*);
 void         switch_selected_char(int*);
 void         edit_selected_char(int*, char*);
+void         boss_movement(t_element*);
+void         boss_fire(t_element*);
 
 t_game*      g_game;
 int          g_window_height;

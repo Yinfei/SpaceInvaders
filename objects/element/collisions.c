@@ -9,6 +9,7 @@ void init_element_collisions() {
   g_game->element_collisions[0] = &enemy_collision;
   g_game->element_collisions[1] = &enemy_collision;
   g_game->element_collisions[2] = &enemy_collision;
+  g_game->element_collisions[9] = &enemy_collision;
   g_game->element_collisions[10] = &landscape_collision;
   g_game->element_collisions[11] = &landscape_collision;
   g_game->element_collisions[12] = &landscape_collision;

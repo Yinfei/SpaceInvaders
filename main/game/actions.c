@@ -6,7 +6,7 @@ int game_state() {
   state = 0;
   if (g_game->player->hitbox.x + g_game->player->hitbox.w <= 0)
     state++;
-  else if (g_game->player->hp <= 0)
+  else if (g_game->player->hp <= 0 || g_game->player->won == 1)
     state++;
   return state;
 }
