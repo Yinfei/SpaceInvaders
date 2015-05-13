@@ -75,6 +75,7 @@ typedef struct s_background {
   SDL_Texture    *mid_texture;
   SDL_Rect       far;
   SDL_Texture    *far_texture;
+  SDL_Texture    *shaded;
 }t_background;
 
 typedef struct s_landscape {
@@ -236,7 +237,7 @@ void         render_gameover();
 void         render_gameover_text();
 int          loop_gameover();
 void         render_killer();
-void         render_gameover_background();
+void         render_shaded_background();
 void         init_enemies_movements();
 void         enemy_mouvement_vertical();
 void         enemy_mouvement_none();
@@ -263,6 +264,9 @@ void         boss_movement(t_element*);
 void         boss_fire(t_element*);
 void         boss_bullet_direction(t_element*, int);
 void         boss_fire_bullet(t_element*, int);
+void         render_win_screen();
+int          loop_win_screen();
+void         render_win_text();
 
 t_game*      g_game;
 int          g_window_height;

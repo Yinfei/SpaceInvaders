@@ -1,6 +1,13 @@
-#include "../prototypes.h"
+#include "prototypes.h"
 
-int loop_gameover() {
+void render_win_screen() {
+  render_shaded_background();
+  render_win_text();
+  render_window();
+  loop_gameover();
+}
+
+int loop_win_screen() {
   while(1)
   {
     while (SDL_PollEvent(&g_game->event))
@@ -17,7 +24,7 @@ int loop_gameover() {
   }
 }
 
-void render_gameover_text() {
+void render_win_text() {
   t_writer writer;
   SDL_Color color = {255,255,255,255};
   SDL_Texture* texture;
@@ -29,31 +36,9 @@ void render_gameover_text() {
   writer.box.h = 50;
   writer.box.x = g_window_width/2 - writer.box.w/2;
   writer.box.y = 100;
-  strcpy(str, "you where killed by ");
-  strcat(str, enemy_name(g_game->player->killed_by));
+  strcpy(str, "Congratulations ! you Won !");
   surface = TTF_RenderText_Blended(writer.font, str, color);
   texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);
   SDL_RenderCopy(g_game->renderer, texture, NULL, &writer.box);
   TTF_CloseFont(writer.font);
-}
-
-void render_killer() {
-  SDL_Rect rec;
-
-  if (g_game->player->killed_by > -1)
-  {
-    rec.w = 50;
-    rec.h = 50;
-    rec.x = g_window_width/2 - rec.w/2;
-    rec.y = 250;
-    SDL_RenderCopy(g_game->renderer, g_game->textures[g_game->player->killed_by], NULL, &rec);
-  }
-}
-
-void render_gameover() {
-  render_shaded_background();
-  render_gameover_text();
-  render_killer();
-  render_window();
-  loop_gameover();
 }

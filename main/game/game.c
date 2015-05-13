@@ -31,10 +31,14 @@ int init_game_elements() {
 }
 
 void free_game() {
-  if (g_game->player->won == 0 && g_game->running != 0)
-    render_gameover();
-
-  add_player_highscore();
+  if (g_game->running != 0)
+  {
+    if (g_game->player->won == 0)
+      render_gameover();
+    else
+      render_win_screen();
+    add_player_highscore();
+  }
   free_player();
   free_landscape();
   free_enemies();
