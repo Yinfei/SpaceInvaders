@@ -10,6 +10,7 @@ int main ()
 
   launcher_loop();
   free_menu();
+  free_highscores();
   SDL_DestroyWindow(g_game->window);
   SDL_Quit();
   return EXIT_SUCCESS;

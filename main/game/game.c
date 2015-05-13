@@ -13,6 +13,8 @@ int init_game() {
   g_game->timer = SDL_GetTicks();
   init_audio();
   init_menu();
+  TTF_Init();
+  init_highscores();
   return 0;
 }
 
@@ -32,6 +34,7 @@ void free_game() {
   if (g_game->player->won == 0 && g_game->running != 0)
     render_gameover();
 
+  add_player_highscore();
   free_player();
   free_landscape();
   free_enemies();

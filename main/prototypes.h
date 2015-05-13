@@ -13,6 +13,12 @@ struct  s_background;
 struct  s_element;
 struct  s_landscape;
 struct  s_enemies;
+struct  s_lifebox;
+struct  s_jukebox;
+struct  s_writer;
+struct  s_choice_screen;
+struct  s_score;
+struct  s_highscores;
 
 typedef struct s_element {
   SDL_Rect              hitbox;
@@ -96,6 +102,16 @@ typedef struct s_choice_screen {
   int           selected;
 }t_choice_screen;
 
+typedef struct s_score {
+  char  name[80];
+  int   score;
+}t_score;
+
+typedef struct s_highscores {
+  t_score*  score[3];
+  t_writer* writer;
+}t_highscores;
+
 typedef struct s_game {
   SDL_Window*       window;
   SDL_Renderer*     renderer;
@@ -115,6 +131,7 @@ typedef struct s_game {
   int               (*element_conditions[30])();
   int               (*element_collisions[30])();
   t_jukebox         jukebox;
+  t_highscores*     highscores;
 }t_game;
 
 void         init_player();
@@ -228,6 +245,20 @@ void         init_enemy_fire();
 void         enemy_default_fire(t_element*);
 void         init_player_lifebox();
 void         render_player_hp();
+int          init_highscores_list();
+int          init_highscores();
+void         add_highscore(char*, int, int);
+void         render_highscores();
+void         free_highscores();
+int          loop_highscores();
+void         decode_highscore_format(char*, int);
+void         input_player_name(char*);
+void         add_player_highscore();
+void         export_highscore_file();
+int          highscore_event_switcher();
+void         render_name_input_screen(int*, char*);
+void         switch_selected_char(int*);
+void         edit_selected_char(int*, char*);
 
 t_game*      g_game;
 int          g_window_height;
