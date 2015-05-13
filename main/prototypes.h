@@ -261,6 +261,8 @@ void         switch_selected_char(int*);
 void         edit_selected_char(int*, char*);
 void         boss_movement(t_element*);
 void         boss_fire(t_element*);
+void         boss_bullet_direction(t_element*, int);
+void         boss_fire_bullet(t_element*, int);
 
 t_game*      g_game;
 int          g_window_height;
