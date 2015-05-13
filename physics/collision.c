@@ -1,7 +1,6 @@
 #include "../main/prototypes.h"
 
 int collision_manager(SDL_Rect* r1, SDL_Rect* r2) {
-  /* check all four corners of each rectangle, to see one is inside the other */
   int collision;
 
   collision = 0;
@@ -9,7 +8,6 @@ int collision_manager(SDL_Rect* r1, SDL_Rect* r2) {
   collision += check_top_right_collision(r1, r2);
   collision += check_bottom_left_collision(r1, r2);
   collision += check_bottom_right_collision(r1, r2);
-  /* acually checking only one corner for r2 one should be fine, juste to make sure r2 is not inside r1 */
   collision += check_top_left_collision(r2, r1);
   collision += check_top_right_collision(r2, r1);
   collision += check_bottom_left_collision(r2, r1);

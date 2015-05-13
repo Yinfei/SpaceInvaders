@@ -47,7 +47,7 @@ void render_highscores() {
 
   g_game->highscores->writer->box.w = 150;
   g_game->highscores->writer->box.h = 30;
-  g_game->highscores->writer->box.x = g_window_width / 2 - g_game->highscores->writer->box.w / 2;
+  g_game->highscores->writer->box.x = g_window_width / 2 - (150 / 2);
   g_game->highscores->writer->box.y = 100;
   clear_window();
   for (i = 0; i < 3; i++)

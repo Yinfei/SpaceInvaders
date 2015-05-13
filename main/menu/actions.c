@@ -22,7 +22,7 @@ void create_menu_button(int type) {
     i = type - 3;
   g_game->menu->buttons[type].w = 300;
   g_game->menu->buttons[type].h = 70;
-  g_game->menu->buttons[type].x = g_window_width/2 - g_game->menu->buttons[i].w/2;
+  g_game->menu->buttons[type].x = g_window_width/2 - 150;
   g_game->menu->buttons[type].y = (i * (g_game->menu->buttons[i].h + 30)) + 50;
 }
 
