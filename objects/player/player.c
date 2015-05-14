@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 void init_player() {
   t_player* player;

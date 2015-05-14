@@ -32,6 +32,7 @@ int init_game_elements() {
 }
 
 void free_game() {
+  Mix_PlayMusic(g_game->jukebox.music[0], -1);
   if (g_game->running != 0)
   {
     if (g_game->player->won == 0)

@@ -17,13 +17,12 @@ void enemy_movement_rotate(t_element* enemy) {
 }
 
 void boss_movement(t_element* boss) {
-  if ((boss->hitbox.x + boss->hitbox.w) < (g_window_width - 100))
+  if ((boss->hitbox.x + boss->hitbox.w) < (g_window_width - 20))
     boss->hitbox.x += 1;
   boss->hitbox.y = sin(boss->timeline)*80 + boss->init_y;
   boss->timeline += 0.1;
- /* if (boss->hitbox.x == (g_window_width + 25))
+  if (boss->hitbox.x == (g_window_width + 25))
     Mix_PlayMusic(g_game->jukebox.music[2], -1);
- */
 }
 
 void enemy_movement(t_element* enemy) {

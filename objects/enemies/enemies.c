@@ -1,4 +1,4 @@
-#include "../main/prototypes.h"
+#include "../../main/prototypes.h"
 
 void init_enemies() {
   t_enemies* enemies;

@@ -16,11 +16,11 @@ void game_actions() {
   element_actions(&g_game->landscape->block_list);
   render_score();
   element_actions(&g_game->bonus->bonus_list);
-  /* changing music ? (for boss ...) */
 }
 
 int launch_game() {
   init_game_elements();
+  Mix_PlayMusic(g_game->jukebox.music[1], -1);
   while (1)
   {
     if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->timer) == 1)
