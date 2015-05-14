@@ -41,7 +41,7 @@ void player_fire() {
 
   if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->player->cooldown) == 1)
   {
-    g_game->player->cooldown = SDL_GetTicks() + 300;
+    g_game->player->cooldown = SDL_GetTicks() + g_game->player->fire_rate;
     bullet = malloc(sizeof(t_element));
     bullet->hitbox.x = g_game->player->hitbox.x + g_game->player->hitbox.w;
     bullet->hitbox.y = g_game->player->hitbox.y + (g_game->player->hitbox.h / 2);

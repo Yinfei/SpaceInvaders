@@ -29,5 +29,4 @@ void player_collisions() {
     }
     bullet = next;
   }
-  /* go through power ups ? */
 }

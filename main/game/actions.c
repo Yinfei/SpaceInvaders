@@ -15,7 +15,7 @@ void game_actions() {
   background_actions();
   element_actions(&g_game->landscape->block_list);
   render_score();
-  /* manage powerups appearing ? manage powerups moving forwards ... */
+  element_actions(&g_game->bonus->bonus_list);
   /* changing music ? (for boss ...) */
 }
 

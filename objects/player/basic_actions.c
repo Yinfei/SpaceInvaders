@@ -34,5 +34,3 @@ void render_player_hp() {
   g_game->player->lifebox->box.w = 30 * g_game->player->hp;
   SDL_RenderCopy(g_game->renderer, g_game->player->lifebox->texture, &rec, &g_game->player->lifebox->box);
 }
-
-/* to come : power up ... */

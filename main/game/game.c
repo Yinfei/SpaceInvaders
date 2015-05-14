@@ -26,6 +26,7 @@ int init_game_elements() {
   init_background();
   init_player();
   init_landscape();
+  init_bonus();
   init_enemies();
   return 0;
 }
@@ -44,4 +45,5 @@ void free_game() {
   free_enemies();
   free_background();
   free_score();
+  free_bonus();
 }

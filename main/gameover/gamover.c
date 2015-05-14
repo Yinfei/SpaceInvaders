@@ -29,7 +29,7 @@ void render_gameover_text() {
   writer.box.h = 50;
   writer.box.x = g_window_width/2 - writer.box.w/2;
   writer.box.y = 100;
-  strcpy(str, "you where killed by ");
+  strcpy(str, "you were killed by ");
   strcat(str, enemy_name(g_game->player->killed_by));
   surface = TTF_RenderText_Blended(writer.font, str, color);
   texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);

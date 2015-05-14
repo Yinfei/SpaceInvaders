@@ -11,6 +11,7 @@ void init_player() {
   player->hitbox.h = 30;
   player->speed    = 3;
   player->hp       = 3;
+  player->fire_rate = 300;
   player->cooldown = 0;
   player->damage_cooldown = 0;
   player->killed_by = -1;
