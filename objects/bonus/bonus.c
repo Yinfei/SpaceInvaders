@@ -11,13 +11,7 @@ int init_bonus() {
   bonus->funcs[4] = &alter_hp;
   bonus->bonus_list = NULL;
   g_game->bonus = bonus;
-
-  create_bonus(200, 150, 31);
-  create_bonus(200, 200, 32);
-  create_bonus(200, 250, 33);
-  create_bonus(200, 300, 34);
-  create_bonus(600, 350, 35);
-
+  bonus_batch();
   return 0;
 }
 
