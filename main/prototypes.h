@@ -43,7 +43,7 @@ typedef struct s_lifebox {
 
 typedef struct s_bonus {
   t_element*    bonus_list;
-  void          (*funcs[5])();
+  void          (*funcs[7])();
 }t_bonus;
 
 typedef struct s_player {
@@ -52,6 +52,7 @@ typedef struct s_player {
   int           speed;
   int           hp;
   int           fire_rate;
+  int           bullet_speed;
   t_lifebox*    lifebox;
   void          (*action_list[200])();
   int           active_actions[200];
@@ -277,9 +278,10 @@ void         render_win_text();
 int          init_bonus();
 void         free_bonus();
 void         switch_bonus(t_element*);
-void         alter_speed();
+void         alter_speed(t_element*);
 void         alter_hp();
-void         alter_fire();
+void         alter_fire(t_element*);
+void         alter_bullet_speed(t_element*);
 void         create_bonus(int, int, int);
 int          bonus_collision(t_element*);
 void         landscape_batch();

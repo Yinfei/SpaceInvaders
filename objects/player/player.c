@@ -12,6 +12,7 @@ void init_player() {
   player->speed    = 3;
   player->hp       = 3;
   player->fire_rate = 300;
+  player->bullet_speed = 5;
   player->cooldown = 0;
   player->damage_cooldown = 0;
   player->killed_by = -1;
@@ -34,7 +35,6 @@ void init_player_lifebox() {
   lifebox->box.w = 90;
   lifebox->box.h = 30;
   lifebox->texture = IMG_LoadTexture(g_game->renderer, "assets/images/lives.png");
-
   g_game->player->lifebox = lifebox;
 }
 

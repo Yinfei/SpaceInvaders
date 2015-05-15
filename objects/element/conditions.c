@@ -16,6 +16,8 @@ void init_element_conditions() {
   g_game->element_conditions[33] = &off_window_left;
   g_game->element_conditions[34] = &off_window_left;
   g_game->element_conditions[35] = &off_window_left;
+  g_game->element_conditions[36] = &off_window_left;
+  g_game->element_conditions[37] = &off_window_left;
 }
 
 int element_conditions(t_element* element) {

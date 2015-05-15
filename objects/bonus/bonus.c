@@ -9,6 +9,8 @@ int init_bonus() {
   bonus->funcs[2] = &alter_fire;
   bonus->funcs[3] = &alter_fire;
   bonus->funcs[4] = &alter_hp;
+  bonus->funcs[5] = &alter_bullet_speed;
+  bonus->funcs[6] = &alter_bullet_speed;
   bonus->bonus_list = NULL;
   g_game->bonus = bonus;
   bonus_batch();

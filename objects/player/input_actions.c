@@ -47,8 +47,8 @@ void player_fire() {
     bullet->hitbox.y = g_game->player->hitbox.y + (g_game->player->hitbox.h / 2);
     bullet->hitbox.w = 5;
     bullet->hitbox.h = 5;
-    bullet->x = 5;
-    bullet->y = 5 * player_bullet_direction();
+    bullet->x = g_game->player->bullet_speed;
+    bullet->y = g_game->player->bullet_speed * player_bullet_direction();
     bullet->prev = NULL;
     bullet->type = 20;
     add_element(&g_game->player->bullet_list, bullet);
