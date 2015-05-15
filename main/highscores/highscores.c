@@ -59,7 +59,7 @@ void render_highscores() {
     strcat(str, tmp);
     surface = TTF_RenderText_Blended(g_game->highscores->writer->font, str, g_game->highscores->writer->color);
     texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);
-    g_game->highscores->writer->box.y = i * 100;
+    g_game->highscores->writer->box.y = i * 100 + 100;
     SDL_RenderCopy(g_game->renderer, texture, NULL, &g_game->highscores->writer->box);
   }
   render_window();
