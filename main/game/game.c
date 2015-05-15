@@ -38,7 +38,10 @@ void free_game() {
     if (g_game->player->won == 0)
       render_gameover();
     else
+    {
       render_win_screen();
+      g_game->score += g_game->player->hp * 15;
+    }
     add_player_highscore();
   }
   free_player();
