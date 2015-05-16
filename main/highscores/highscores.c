@@ -47,7 +47,7 @@ void render_highscores() {
 
   g_game->highscores->writer->box.w = 150;
   g_game->highscores->writer->box.h = 30;
-  g_game->highscores->writer->box.x = g_window_width / 2 - g_game->highscores->writer->box.w / 2;
+  g_game->highscores->writer->box.x = g_window_width / 2 - (150 / 2);
   g_game->highscores->writer->box.y = 100;
   clear_window();
   for (i = 0; i < 3; i++)
@@ -59,7 +59,7 @@ void render_highscores() {
     strcat(str, tmp);
     surface = TTF_RenderText_Blended(g_game->highscores->writer->font, str, g_game->highscores->writer->color);
     texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);
-    g_game->highscores->writer->box.y = i * 100;
+    g_game->highscores->writer->box.y = i * 100 + 100;
     SDL_RenderCopy(g_game->renderer, texture, NULL, &g_game->highscores->writer->box);
   }
   render_window();

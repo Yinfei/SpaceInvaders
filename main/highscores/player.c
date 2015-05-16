@@ -6,8 +6,8 @@ void input_player_name(char* name) {
 
   g_game->highscores->writer->box.w = 100;
   g_game->highscores->writer->box.h = 50;
-  g_game->highscores->writer->box.x = g_window_width / 2 - g_game->highscores->writer->box.w / 2;
-  g_game->highscores->writer->box.y = g_window_height / 2 - g_game->highscores->writer->box.h / 2;
+  g_game->highscores->writer->box.x = g_window_width / 2 - 50;
+  g_game->highscores->writer->box.y = g_window_height / 2 - 25;
   running = 1;
   selected = 0;
   strcpy(name, "AAA");

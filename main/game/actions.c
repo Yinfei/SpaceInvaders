@@ -6,8 +6,15 @@ int game_state() {
   state = 0;
   if (g_game->player->hitbox.x + g_game->player->hitbox.w <= 0)
     state++;
-  else if (g_game->player->hp <= 0)
+  else if (g_game->player->hp <= 0 || g_game->player->won == 1)
     state++;
+  else if (strcmp(SDL_GetError(), "") != 0
+    && strcmp(SDL_GetError(), "Unknown touch device") != 0)
+  {
+    g_game->running = 0;
+    printf("%s\n", SDL_GetError());
+    state++;
+  }
   return state;
 }
 
@@ -15,12 +22,12 @@ void game_actions() {
   background_actions();
   element_actions(&g_game->landscape->block_list);
   render_score();
-  /* manage powerups appearing ? manage powerups moving forwards ... */
-  /* changing music ? (for boss ...) */
+  element_actions(&g_game->bonus->bonus_list);
 }
 
 int launch_game() {
   init_game_elements();
+  Mix_PlayMusic(g_game->jukebox.music[1], -1);
   while (1)
   {
     if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->timer) == 1)

@@ -14,6 +14,7 @@ int damage_player(int i, t_element* element) {
   if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->player->damage_cooldown) == 1)
   {
     g_game->player->hp -= i;
+    Mix_PlayChannel(1, g_game->jukebox.soundboard[4], 0);
     if (g_game->player->hp <= 0)
       g_game->player->killed_by = element->parent;
 
@@ -34,5 +35,3 @@ void render_player_hp() {
   g_game->player->lifebox->box.w = 30 * g_game->player->hp;
   SDL_RenderCopy(g_game->renderer, g_game->player->lifebox->texture, &rec, &g_game->player->lifebox->box);
 }
-
-/* to come : power up ... */

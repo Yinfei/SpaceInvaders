@@ -41,11 +41,18 @@ typedef struct s_lifebox {
   SDL_Texture*  texture;
 }t_lifebox;
 
+typedef struct s_bonus {
+  t_element*    bonus_list;
+  void          (*funcs[7])();
+}t_bonus;
+
 typedef struct s_player {
   SDL_Rect      hitbox;
   SDL_Texture*  texture;
   int           speed;
   int           hp;
+  int           fire_rate;
+  int           bullet_speed;
   t_lifebox*    lifebox;
   void          (*action_list[200])();
   int           active_actions[200];
@@ -75,6 +82,7 @@ typedef struct s_background {
   SDL_Texture    *mid_texture;
   SDL_Rect       far;
   SDL_Texture    *far_texture;
+  SDL_Texture    *shaded;
 }t_background;
 
 typedef struct s_landscape {
@@ -126,10 +134,11 @@ typedef struct s_game {
   t_writer*         writer;
   t_background      background;
   t_landscape*      landscape;
+  t_bonus*          bonus;
   t_enemies*        enemies;
-  SDL_Texture*      textures[30];
-  int               (*element_conditions[30])();
-  int               (*element_collisions[30])();
+  SDL_Texture*      textures[40];
+  int               (*element_conditions[40])();
+  int               (*element_collisions[40])();
   t_jukebox         jukebox;
   t_highscores*     highscores;
 }t_game;
@@ -236,7 +245,7 @@ void         render_gameover();
 void         render_gameover_text();
 int          loop_gameover();
 void         render_killer();
-void         render_gameover_background();
+void         render_shaded_background();
 void         init_enemies_movements();
 void         enemy_mouvement_vertical();
 void         enemy_mouvement_none();
@@ -259,6 +268,25 @@ int          highscore_event_switcher();
 void         render_name_input_screen(int*, char*);
 void         switch_selected_char(int*);
 void         edit_selected_char(int*, char*);
+void         boss_movement(t_element*);
+void         boss_fire(t_element*);
+void         boss_bullet_direction(t_element*, int);
+void         boss_fire_bullet(t_element*, int);
+void         render_win_screen();
+int          loop_win_screen();
+void         render_win_text();
+int          init_bonus();
+void         free_bonus();
+void         switch_bonus(t_element*);
+void         alter_speed(t_element*);
+void         alter_hp();
+void         alter_fire(t_element*);
+void         alter_bullet_speed(t_element*);
+void         create_bonus(int, int, int);
+int          bonus_collision(t_element*);
+void         landscape_batch();
+void         bonus_batch();
+void         enemies_batch();
 
 t_game*      g_game;
 int          g_window_height;

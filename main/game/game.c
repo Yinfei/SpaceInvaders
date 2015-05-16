@@ -26,18 +26,28 @@ int init_game_elements() {
   init_background();
   init_player();
   init_landscape();
+  init_bonus();
   init_enemies();
   return 0;
 }
 
 void free_game() {
-  if (g_game->player->won == 0 && g_game->running != 0)
-    render_gameover();
-
-  add_player_highscore();
+  Mix_PlayMusic(g_game->jukebox.music[0], -1);
+  if (g_game->running != 0)
+  {
+    if (g_game->player->won == 0)
+      render_gameover();
+    else
+    {
+      render_win_screen();
+      g_game->score += g_game->player->hp * 15;
+    }
+    add_player_highscore();
+  }
   free_player();
   free_landscape();
   free_enemies();
   free_background();
   free_score();
+  free_bonus();
 }

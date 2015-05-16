@@ -29,25 +29,12 @@ void render_gameover_text() {
   writer.box.h = 50;
   writer.box.x = g_window_width/2 - writer.box.w/2;
   writer.box.y = 100;
-  strcpy(str, "you where killed by ");
+  strcpy(str, "you were killed by ");
   strcat(str, enemy_name(g_game->player->killed_by));
   surface = TTF_RenderText_Blended(writer.font, str, color);
   texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);
   SDL_RenderCopy(g_game->renderer, texture, NULL, &writer.box);
   TTF_CloseFont(writer.font);
-}
-
-void render_gameover_background() {
-  SDL_Texture* texture;
-  SDL_Rect rec;
-
-  rec.x = 0;
-  rec.y = 0;
-  rec.w = g_window_width;
-  rec.h = g_window_height;
-  texture = IMG_LoadTexture(g_game->renderer, "assets/images/black.png");
-  SDL_RenderCopy(g_game->renderer, texture, NULL, &rec);
-  SDL_DestroyTexture(texture);
 }
 
 void render_killer() {
@@ -64,7 +51,7 @@ void render_killer() {
 }
 
 void render_gameover() {
-  render_gameover_background();
+  render_shaded_background();
   render_gameover_text();
   render_killer();
   render_window();
