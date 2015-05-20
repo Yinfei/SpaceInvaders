@@ -7,10 +7,10 @@ SDL_Texture* element_texture(t_element* element) {
 SDL_Rect crop_texture(t_element* element, SDL_Rect rec) {
   if (element->type == 12)
   {
-    rec.x = 256 * (element->hp - 1);
+    rec.x = 200 * (element->hp - 1);
     rec.y = 0;
-    rec.w = 256;
-    rec.h = 256;
+    rec.w = 200;
+    rec.h = 200;
   }
   return rec;
 }

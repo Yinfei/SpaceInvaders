@@ -45,8 +45,8 @@ void player_fire() {
     bullet = malloc(sizeof(t_element));
     bullet->hitbox.x = g_game->player->hitbox.x + g_game->player->hitbox.w;
     bullet->hitbox.y = g_game->player->hitbox.y + (g_game->player->hitbox.h / 2);
-    bullet->hitbox.w = 5;
-    bullet->hitbox.h = 5;
+    bullet->hitbox.w = 20;
+    bullet->hitbox.h = 7;
     bullet->x = g_game->player->bullet_speed;
     bullet->y = g_game->player->bullet_speed * player_bullet_direction();
     bullet->prev = NULL;

@@ -6,13 +6,13 @@ void init_textures() {
   for (i = 0; i < 40; i++)
     g_game->textures[i] = NULL;
 
-  g_game->textures[0]  = IMG_LoadTexture(g_game->renderer, "assets/images/fatcat.png");
-  g_game->textures[1]  = IMG_LoadTexture(g_game->renderer, "assets/images/enemy1.png");
-  g_game->textures[2]  = IMG_LoadTexture(g_game->renderer, "assets/images/bomb.png");
+  g_game->textures[0]  = IMG_LoadTexture(g_game->renderer, "assets/images/enemy1.png");
+  g_game->textures[1]  = IMG_LoadTexture(g_game->renderer, "assets/images/enemy2.png");
+  g_game->textures[2]  = IMG_LoadTexture(g_game->renderer, "assets/images/enemy3.png");
   g_game->textures[9] = IMG_LoadTexture(g_game->renderer, "assets/images/boss.png");
-  g_game->textures[10] = IMG_LoadTexture(g_game->renderer, "assets/images/solid_block.png");
-  g_game->textures[11] = IMG_LoadTexture(g_game->renderer, "assets/images/solid_block2.png");
-  g_game->textures[12] = IMG_LoadTexture(g_game->renderer, "assets/images/block.png");
+  g_game->textures[10] = IMG_LoadTexture(g_game->renderer, "assets/images/block1.png");
+  g_game->textures[11] = IMG_LoadTexture(g_game->renderer, "assets/images/block2.png");
+  g_game->textures[12] = IMG_LoadTexture(g_game->renderer, "assets/images/block3.png");
   g_game->textures[20] = IMG_LoadTexture(g_game->renderer, "assets/images/player_bullet.png");
   g_game->textures[21] = IMG_LoadTexture(g_game->renderer, "assets/images/enemy_bullet.png");
   g_game->textures[22] = IMG_LoadTexture(g_game->renderer, "assets/images/boss_bullet.png");
