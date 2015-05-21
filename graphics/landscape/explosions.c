@@ -13,6 +13,6 @@ void explosion_block(t_element* enemy) {
   block->x = -1;
   block->y = 0;
   block->timeline = SDL_GetTicks();
-  block->cooldown = SDL_GetTicks() + 1000;
+  block->cooldown = SDL_GetTicks() + 400;
   add_element(&g_game->landscape->block_list, block);
 }

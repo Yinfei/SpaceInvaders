@@ -288,7 +288,7 @@ void         landscape_batch();
 void         bonus_batch();
 void         enemies_batch();
 void         explosion_block(t_element*);
-int          displayed_one_second(t_element*);
+int          displayed_given_time(t_element*);
 
 t_game*      g_game;
 int          g_window_height;
