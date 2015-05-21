@@ -6,7 +6,8 @@ int simulate_player_collision() {
   current = g_game->landscape->block_list;
   while (current != NULL)
   {
-    if (collision_manager(&g_game->player->hitbox, &current->hitbox) > 0)
+    if (collision_manager(&g_game->player->hitbox, &current->hitbox) > 0
+      && current->type != 13)
       return 1;
     else
       current = next_element(current);

@@ -13,3 +13,10 @@ int off_window_right(t_element* element) {
   else
     return 0;
 }
+
+int displayed_one_second(t_element* element) {
+  if (SDL_TICKS_PASSED(SDL_GetTicks(), element->cooldown) == 1)
+    return 1;
+  else
+    return 0;
+}

@@ -13,6 +13,7 @@ void init_textures() {
   g_game->textures[10] = IMG_LoadTexture(g_game->renderer, "assets/images/block1.png");
   g_game->textures[11] = IMG_LoadTexture(g_game->renderer, "assets/images/block2.png");
   g_game->textures[12] = IMG_LoadTexture(g_game->renderer, "assets/images/block3.png");
+  g_game->textures[13] = IMG_LoadTexture(g_game->renderer, "assets/images/explosion.png");
   g_game->textures[20] = IMG_LoadTexture(g_game->renderer, "assets/images/player_bullet.png");
   g_game->textures[21] = IMG_LoadTexture(g_game->renderer, "assets/images/enemy_bullet.png");
   g_game->textures[22] = IMG_LoadTexture(g_game->renderer, "assets/images/boss_bullet.png");

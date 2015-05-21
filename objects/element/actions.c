@@ -47,15 +47,17 @@ int damage_element(t_element** list, t_element* element) {
   element->hp -= 1;
   if (element->hp == 0)
   {
-    remove_element(list, element);
     critical = 1;
     if (element->type <= 9)
+    {
       Mix_PlayChannel(1, g_game->jukebox.soundboard[5], 0);
+      explosion_block(element);
+    }
     if (element->type == 9)
       g_game->player->won = 1;
     g_game->score += element->points;
+    remove_element(list, element);
   }
-
   return critical;
 }
 
