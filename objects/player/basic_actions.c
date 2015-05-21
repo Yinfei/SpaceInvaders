@@ -3,9 +3,9 @@
 void render_player() {
   SDL_Rect rect;
 
-  rect.x = ((SDL_GetTicks() / 50) % 3) * 150;
+  rect.x = ((SDL_GetTicks() / 50) % 2) * 100;
   rect.y = 0;
-  rect.w = 150;
+  rect.w = 100;
   rect.h = 100;
   SDL_RenderCopy(g_game->renderer, g_game->player->texture, &rect, &g_game->player->hitbox);
 }
