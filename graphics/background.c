@@ -33,7 +33,6 @@ void render_background() {
       rec.y = j;
       SDL_RenderCopy(g_game->renderer, g_game->background.stars, NULL, &rec);
     }
-
   SDL_SetRenderDrawColor(g_game->renderer, 0, 25, g_game->background.blue, 255);
   SDL_RenderFillRect(g_game->renderer, g_game->background.sky);
 }

@@ -37,6 +37,7 @@ void render_choice_screen() {
 int launch_menu() {
   int i;
 
+  SDL_SetRenderDrawColor(g_game->renderer, 0, 0, 0, 255);
   i = 0;
   while(1){
     if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->timer) == 1)

@@ -19,8 +19,8 @@ void init_textures() {
   g_game->textures[22] = IMG_LoadTexture(g_game->renderer, "assets/images/boss_bullet.png");
   g_game->textures[31] = IMG_LoadTexture(g_game->renderer, "assets/images/speed_up.png");
   g_game->textures[32] = IMG_LoadTexture(g_game->renderer, "assets/images/speed_down.png");
-  g_game->textures[33] = IMG_LoadTexture(g_game->renderer, "assets/images/bonus33.png");
-  g_game->textures[34] = IMG_LoadTexture(g_game->renderer, "assets/images/bonus34.png");
+  g_game->textures[33] = IMG_LoadTexture(g_game->renderer, "assets/images/fire_rate_up.png");
+  g_game->textures[34] = IMG_LoadTexture(g_game->renderer, "assets/images/fire_rate_down.png");
   g_game->textures[35] = IMG_LoadTexture(g_game->renderer, "assets/images/life.png");
   g_game->textures[36] = IMG_LoadTexture(g_game->renderer, "assets/images/bullet_speed_up.png");
   g_game->textures[37] = IMG_LoadTexture(g_game->renderer, "assets/images/bullet_speed_down.png");
