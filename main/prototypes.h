@@ -76,12 +76,12 @@ typedef struct s_enemies {
 }t_enemies;
 
 typedef struct s_background {
-  SDL_Rect       near;
-  SDL_Texture    *near_texture;
-  SDL_Rect       mid;
-  SDL_Texture    *mid_texture;
-  SDL_Rect       far;
-  SDL_Texture    *far_texture;
+  int            blue;
+  int            offset;
+  int            current_offset;
+  Uint32         cooldown;
+  SDL_Rect*      sky;
+  SDL_Texture    *stars;
   SDL_Texture    *shaded;
 }t_background;
 
