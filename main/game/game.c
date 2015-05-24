@@ -7,7 +7,7 @@ int init_game() {
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)
     return -1;
 
-  g_game->window = SDL_CreateWindow("DUBSTEP CAT !",100,200,g_window_width,g_window_height,0);
+  g_game->window = SDL_CreateWindow("Space Invaders !",100,200,g_window_width,g_window_height,0);
   g_game->renderer = SDL_CreateRenderer(g_game->window,-1,0);
   g_game->running = 1;
   g_game->timer = SDL_GetTicks();
