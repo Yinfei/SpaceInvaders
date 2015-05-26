@@ -1,7 +1,7 @@
 #include "../prototypes.h"
 
 int init_game() {
-  g_window_height = 420;
+  g_window_height = 400;
   g_window_width = 640;
 
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) < 0)

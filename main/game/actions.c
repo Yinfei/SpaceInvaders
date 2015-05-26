@@ -10,7 +10,7 @@ int game_state() {
     state++;
   else if (strcmp(SDL_GetError(), "") != 0
     && strcmp(SDL_GetError(), "Unknown touch device") != 0
-    && strcmp(SDL_GetError(), "ERROR: NumPoints = 0") != 0)
+    && strcmp(SDL_GetError(), "ERROR: NumPoints = 0\n") != 0)
   {
     g_game->running = 0;
     printf("%s\n", SDL_GetError());

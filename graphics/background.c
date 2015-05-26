@@ -46,7 +46,7 @@ void background_actions() {
    && g_game->background.blue > 0)
   {
     g_game->background.blue -= 1;
-    g_game->background.cooldown = SDL_GetTicks() + 100;
+    g_game->background.cooldown = SDL_GetTicks() + 400;
   }
 }
 

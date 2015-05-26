@@ -22,7 +22,7 @@ void enemy_bullet_direction(t_element* enemy, t_element* bullet) {
     angle = y;
 
   bullet->x = -3;
-  if (enemy->type == 1 && enemy->type == 9)
+  if (enemy->type == 1)
     bullet->y = angle;
   else
     bullet->y = 0;

@@ -10,6 +10,7 @@ void init_element_conditions() {
   g_game->element_conditions[11] = &off_window_left;
   g_game->element_conditions[12] = &off_window_left;
   g_game->element_conditions[13] = &displayed_given_time;
+  g_game->element_conditions[14] = &off_window_left;
   g_game->element_conditions[20] = &off_window_right;
   g_game->element_conditions[21] = &off_window_left;
   g_game->element_conditions[31] = &off_window_left;
