@@ -6,7 +6,7 @@ int main ()
 
   g_game = &new_game;
   if (init_game() < 0)
-    return error();
+    return -1;
 
   launcher_loop();
   free_menu();

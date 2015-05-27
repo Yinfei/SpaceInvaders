@@ -27,13 +27,6 @@ void init_enemies_movements() {
   g_game->enemies->movements[9] = &boss_movement;
 }
 
-void init_enemies_names() {
-  g_game->enemies->names[0] = "fatty";
-  g_game->enemies->names[1] = "bobby";
-  g_game->enemies->names[2] = "mine";
-  g_game->enemies->names[9] = "BOSS";
-}
-
 void create_enemy(int x, int y, int type) {
   t_element* enemy;
 

@@ -14,9 +14,15 @@ int damage_player(int i, t_element* element) {
   if (SDL_TICKS_PASSED(SDL_GetTicks(), g_game->player->damage_cooldown) == 1)
   {
     g_game->player->hp -= i;
-    Mix_PlayChannel(1, g_game->jukebox.soundboard[4], 0);
+
     if (g_game->player->hp <= 0)
+    {
       g_game->player->killed_by = element->parent;
+      Mix_PlayChannel(1, g_game->jukebox.soundboard[6], 0);
+    }
+    else
+      Mix_PlayChannel(1, g_game->jukebox.soundboard[4], 0);
+
 
     g_game->player->damage_cooldown = SDL_GetTicks() + 500;
     return 1;

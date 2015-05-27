@@ -212,7 +212,6 @@ void         set_bullet_direction_up();
 void         set_bullet_direction_down();
 void         reset_bullet_direction();
 int          enemy_hp(int);
-int          error();
 int          init_audio();
 void         init_music();
 void         init_soundboard();

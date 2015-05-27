@@ -2,11 +2,11 @@
 
 int init_highscores() {
   t_highscores* highscores;
-  SDL_Color color = {12,136,125,255};
+  SDL_Color color = {66,148,211,255};
 
   highscores = malloc(sizeof(t_highscores));
   highscores->writer = malloc(sizeof(t_writer));
-  highscores->writer->font = TTF_OpenFont("assets/fonts/lekton.ttf", 50);
+  highscores->writer->font = TTF_OpenFont("assets/fonts/lekton.ttf", 100);
   highscores->writer->box.w = 150;
   highscores->writer->box.h = 30;
   highscores->writer->box.x = g_window_width / 2 - highscores->writer->box.w / 2;
@@ -45,10 +45,10 @@ void render_highscores() {
   char tmp[80];
   int i;
 
-  g_game->highscores->writer->box.w = 150;
-  g_game->highscores->writer->box.h = 30;
-  g_game->highscores->writer->box.x = g_window_width / 2 - (150 / 2);
-  g_game->highscores->writer->box.y = 100;
+  g_game->highscores->writer->box.w = 300;
+  g_game->highscores->writer->box.h = 75;
+  g_game->highscores->writer->box.x = g_window_width / 2 - (300 / 2);
+  g_game->highscores->writer->box.y = 75;
   clear_window();
   for (i = 0; i < 3; i++)
   {
@@ -59,7 +59,7 @@ void render_highscores() {
     strcat(str, tmp);
     surface = TTF_RenderText_Blended(g_game->highscores->writer->font, str, g_game->highscores->writer->color);
     texture = SDL_CreateTextureFromSurface(g_game->renderer, surface);
-    g_game->highscores->writer->box.y = i * 100 + 100;
+    g_game->highscores->writer->box.y = i * 100 + 75;
     SDL_RenderCopy(g_game->renderer, texture, NULL, &g_game->highscores->writer->box);
   }
   render_window();
