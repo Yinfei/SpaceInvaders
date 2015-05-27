@@ -13,9 +13,11 @@ int menu_event_switcher() {
     {
       if (g_game->event.key.keysym.sym == 32)
         return 0;
-      else if (g_game->event.key.keysym.sym == SDLK_UP && g_game->menu->selected > 3)
+      else if (g_game->event.key.keysym.sym == SDLK_UP
+        && g_game->menu->selected > 3)
         g_game->menu->selected -= 1;
-      else if (g_game->event.key.keysym.sym == SDLK_DOWN && g_game->menu->selected < 5)
+      else if (g_game->event.key.keysym.sym == SDLK_DOWN
+        && g_game->menu->selected < 5)
         g_game->menu->selected += 1;
     }
   }
@@ -32,9 +34,11 @@ int highscore_event_switcher(int* selected, char* name) {
     {
       if (g_game->event.key.keysym.sym == 32)
         return 0;
-      else if (g_game->event.key.keysym.sym == SDLK_UP || g_game->event.key.keysym.sym == SDLK_DOWN)
+      else if (g_game->event.key.keysym.sym == SDLK_UP
+        || g_game->event.key.keysym.sym == SDLK_DOWN)
         edit_selected_char(selected, name);
-      else if (g_game->event.key.keysym.sym == SDLK_LEFT || g_game->event.key.keysym.sym == SDLK_RIGHT)
+      else if (g_game->event.key.keysym.sym == SDLK_LEFT
+        || g_game->event.key.keysym.sym == SDLK_RIGHT)
         switch_selected_char(selected);
     }
   }
@@ -66,9 +70,4 @@ int event_switcher() {
   game_actions();
   render_player_hp();
   return 0;
-}
-
-int error() {
-  printf("some sort of error message g_game->error\n");
-  return -1;
 }

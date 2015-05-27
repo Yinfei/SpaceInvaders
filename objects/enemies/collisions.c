@@ -9,7 +9,7 @@ void init_enemies_hp(t_enemies* enemies) {
   enemies->hp[0] = 3;
   enemies->hp[1] = 2;
   enemies->hp[2] = 1;
-  enemies->hp[9] = 10;
+  enemies->hp[9] = 30;
 }
 
 int enemy_hp(int type) {

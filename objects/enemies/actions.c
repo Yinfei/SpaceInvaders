@@ -22,7 +22,7 @@ void enemy_bullet_direction(t_element* enemy, t_element* bullet) {
     angle = y;
 
   bullet->x = -3;
-  if (enemy->type == 1 && enemy->type == 9)
+  if (enemy->type == 1)
     bullet->y = angle;
   else
     bullet->y = 0;
@@ -35,8 +35,8 @@ void boss_bullet_direction(t_element* bullet, int type) {
 
   if (type == 1 || type == -1)
   {
-    bullet->x = -3;
-    bullet->y = 3 * type;
+    bullet->x = -5;
+    bullet->y = 5 * type;
   }
   else
   {
@@ -47,10 +47,10 @@ void boss_bullet_direction(t_element* bullet, int type) {
       y = g_game->player->hitbox.y - bullet->hitbox.y;
 
     if (x != 0)
-      angle = (3 * y) / x;
+      angle = (5 * y) / x;
     else
       angle = y;
-    bullet->x = -3;
+    bullet->x = -5;
     bullet->y = angle;
   }
 }

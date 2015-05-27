@@ -76,12 +76,12 @@ typedef struct s_enemies {
 }t_enemies;
 
 typedef struct s_background {
-  SDL_Rect       near;
-  SDL_Texture    *near_texture;
-  SDL_Rect       mid;
-  SDL_Texture    *mid_texture;
-  SDL_Rect       far;
-  SDL_Texture    *far_texture;
+  int            blue;
+  int            offset;
+  int            current_offset;
+  Uint32         cooldown;
+  SDL_Rect*      sky;
+  SDL_Texture    *stars;
   SDL_Texture    *shaded;
 }t_background;
 
@@ -212,7 +212,6 @@ void         set_bullet_direction_up();
 void         set_bullet_direction_down();
 void         reset_bullet_direction();
 int          enemy_hp(int);
-int          error();
 int          init_audio();
 void         init_music();
 void         init_soundboard();
@@ -287,6 +286,8 @@ int          bonus_collision(t_element*);
 void         landscape_batch();
 void         bonus_batch();
 void         enemies_batch();
+void         explosion_block(t_element*);
+int          displayed_given_time(t_element*);
 
 t_game*      g_game;
 int          g_window_height;

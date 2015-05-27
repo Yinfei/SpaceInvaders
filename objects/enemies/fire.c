@@ -22,8 +22,8 @@ void boss_fire_bullet(t_element* enemy, int type) {
   bullet = malloc(sizeof(t_element));
   bullet->hitbox.x = enemy->hitbox.x;
   bullet->hitbox.y = enemy->hitbox.y + (enemy->hitbox.h / 2);
-  bullet->hitbox.w = 20;
-  bullet->hitbox.h = 20;
+  bullet->hitbox.w = 30;
+  bullet->hitbox.h = 30;
   bullet->type = 22;
   bullet->parent = enemy->type;
   boss_bullet_direction(bullet, type);
@@ -41,7 +41,7 @@ void boss_fire(t_element* enemy) {
       boss_fire_bullet(enemy, -1);
       boss_fire_bullet(enemy, 0);
       boss_fire_bullet(enemy, 1);
-      enemy->cooldown = SDL_GetTicks() + 200;
+      enemy->cooldown = SDL_GetTicks() + 150;
     }
   }
 }
@@ -58,8 +58,8 @@ void enemy_default_fire(t_element* enemy) {
       bullet = malloc(sizeof(t_element));
       bullet->hitbox.x = enemy->hitbox.x;
       bullet->hitbox.y = enemy->hitbox.y + (enemy->hitbox.h / 2);
-      bullet->hitbox.w = 10;
-      bullet->hitbox.h = 10;
+      bullet->hitbox.w = 20;
+      bullet->hitbox.h = 7;
       bullet->type = 21;
       bullet->parent = enemy->type;
       enemy_bullet_direction(enemy, bullet);

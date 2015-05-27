@@ -2,7 +2,7 @@
 
 int init_score(){
   t_writer* writer;
-  SDL_Color color = {12,36,125,255};
+  SDL_Color color = {255,0,51,255};
 
   g_game->score = 0;
   writer = malloc(sizeof(t_writer));
